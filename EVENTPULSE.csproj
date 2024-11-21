@@ -95,13 +95,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="LOGO-removebg.png" />
+    <Resource Include="imagenes\LOGO-removebg.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="user.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon-7797704.png" />
+    <Resource Include="imagenes\icon-7797704.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Correos\correos.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
