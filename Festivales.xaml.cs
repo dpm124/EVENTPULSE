@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -210,6 +211,22 @@ namespace EVENTPULSE
             {
                 MessageBox.Show("No se pudo recuperar la información del festival.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        //Método para cambiar el color del estado 
+
+
+        // Método para salir del programa
+        private void OnSalirClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+
+        // Método para ver la Ayuda
+        private void OnAyudaClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Funcionalidad de ayuda en desarrollo.", "Ayuda", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

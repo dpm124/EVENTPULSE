@@ -3,25 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Gestión de Festivales" Height="600" Width="900"
         WindowStartupLocation="CenterScreen">
-    <Grid>
-        <!-- Header -->
-        <DockPanel LastChildFill="True" Background="#A0C4D9">
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="60">
-                <Image Source="/imagenes/icon-7797704.png" Width="50" Height="50" Margin="10"/>
-                <TextBlock Text="FESTIVALES" FontSize="28" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0"/>
+    <DockPanel Background="#A0C4D9">
+        <!-- Barra de herramientas superior -->
+        <DockPanel DockPanel.Dock="Top" Height="50" Background="#D3D3D3">
+            <!-- Logo del proyecto -->
+            <Image Source="/imagenes/LOGO-removebg.png" Width="40" Height="40" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+            <!-- Botones Ayuda y Salir -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0">
+                <Button Content="Ayuda" Width="80" Margin="5" Background="#5BC0DE" Foreground="White" FontWeight="Bold" Click="OnAyudaClick"/>
+                <Button Content="Salir" Width="80" Margin="5" Background="#FF6961" Foreground="White" FontWeight="Bold" Click="OnSalirClick"/>
             </StackPanel>
         </DockPanel>
 
-        <!-- Content -->
-        <Grid Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <!-- Barra indicativa de la vista actual -->
+        <DockPanel DockPanel.Dock="Top" Height="40" Background="#FFFFFF">
+            <TextBlock Text="FESTIVALES" FontSize="20" FontWeight="Bold" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </DockPanel>
+
+        <!-- Contenido principal -->
+        <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <!-- Filtros de búsqueda -->
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,10">
-                <TextBlock Text="Buscar festival:" VerticalAlignment="Center" Margin="5"/>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Buscar:" VerticalAlignment="Center" Margin="5"/>
                 <TextBox x:Name="txtBuscar" Width="150" Margin="5"/>
                 <TextBlock Text="Ordenar por:" VerticalAlignment="Center" Margin="5"/>
                 <ComboBox x:Name="cbOrdenarPor" Width="120" Margin="5">
@@ -29,18 +38,53 @@
                     <ComboBoxItem Content="Ubicación"/>
                     <ComboBoxItem Content="Fecha"/>
                 </ComboBox>
-                <TextBlock Text="Ordenación:" VerticalAlignment="Center" Margin="5"/>
-                <ComboBox x:Name="cbOrdenacion" Width="120" Margin="5">
-                    <ComboBoxItem Content="Ascendente"/>
-                    <ComboBoxItem Content="Descendente"/>
-                </ComboBox>
-                <Button x:Name="btnBuscar" Content="Buscar" Width="100" Margin="5" Background="#ADD8E6" Foreground="White" Click="OnBuscarClick"/>
-                <Button x:Name="btnAgregar" Content="Añadir Festival" Width="150" Margin="5" Background="#90EE90" Foreground="White" Click="OnAgregarFestivalClick"/>
+                <TextBlock Text="Desde:" VerticalAlignment="Center" Margin="5"/>
+                <DatePicker x:Name="dpDesde" Width="120" Margin="5"/>
+                <TextBlock Text="Hasta:" VerticalAlignment="Center" Margin="5"/>
+                <DatePicker x:Name="dpHasta" Width="120" Margin="5"/>
+                <Button x:Name="btnBuscar" Content="Filtrar" Width="100" Margin="5" Background="#5BC0DE" Foreground="White" Click="OnBuscarClick"/>
+                <Button x:Name="btnAgregar" Content="Añadir Festival" Width="150" Margin="5" Background="#5CB85C" Foreground="White" Click="OnAgregarFestivalClick"/>
             </StackPanel>
 
             <!-- Tabla de Festivales -->
             <DataGrid x:Name="dgFestivales" Grid.Row="1" AutoGenerateColumns="False" Margin="0,10" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="200"/>
+                    <DataGridTextColumn Header="Ubicación" Binding="{Binding Ubicacion}" Width="150"/>
+                    <DataGridTextColumn Header="Día" Binding="{Binding Dia}" Width="100"/>
+                    <DataGridTextColumn Header="Mes" Binding="{Binding Mes}" Width="100"/>
+                    <DataGridTemplateColumn Header="Estado" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border Background="{Binding Estado, Converter={StaticResource EstadoToColorConverter}}" 
+                                        CornerRadius="5" Padding="5">
+                                    <TextBlock Text="{Binding Estado}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="White"/>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Opciones" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <!-- Botón para Editar -->
+                                    <Button ToolTip="Editar" Click="OnEditarClick" Background="Transparent" BorderBrush="Transparent">
+                                        <Image Source="/imagenes/IMGeditar.png" Width="16" Height="16"/>
+                                    </Button>
+                                    <!-- Botón para Borrar -->
+                                    <Button ToolTip="Borrar" Click="OnBorrarClick" Background="Transparent" BorderBrush="Transparent">
+                                        <Image Source="/imagenes/IMGborrar.png" Width="16" Height="16"/>
+                                    </Button>
+                                    <!-- Botón para Info -->
+                                    <Button ToolTip="Información" Click="OnInfoClick" Background="Transparent" BorderBrush="Transparent">
+                                        <Image Source="/imagenes/IMGinfo.png" Width="16" Height="16"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
             </DataGrid>
         </Grid>
-    </Grid>
+    </DockPanel>
 </Window>
