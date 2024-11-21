@@ -5,9 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Globalization;
 
 namespace EVENTPULSE
 {
@@ -60,12 +60,27 @@ namespace EVENTPULSE
                 dgFestivales.Columns.Clear();
                 foreach (var columna in nombresColumnas)
                 {
-                    dgFestivales.Columns.Add(new DataGridTextColumn
+                    if (columna == "Estado")
                     {
-                        Header = columna,
-                        Binding = new System.Windows.Data.Binding($"[{columna}]"),
-                        Width = new DataGridLength(1, DataGridLengthUnitType.Star)
-                    });
+                        dgFestivales.Columns.Add(new DataGridTemplateColumn
+                        {
+                            Header = columna,
+                            CellTemplate = new DataTemplate
+                            {
+                                VisualTree = CreateEstadoTemplate()
+                            },
+                            Width = new DataGridLength(1, DataGridLengthUnitType.Star)
+                        });
+                    }
+                    else
+                    {
+                        dgFestivales.Columns.Add(new DataGridTextColumn
+                        {
+                            Header = columna,
+                            Binding = new System.Windows.Data.Binding($"[{columna}]"),
+                            Width = new DataGridLength(1, DataGridLengthUnitType.Star)
+                        });
+                    }
                 }
 
                 // Agregar columna fija para opciones (botones)
@@ -103,6 +118,28 @@ namespace EVENTPULSE
             }
         }
 
+        private FrameworkElementFactory CreateEstadoTemplate()
+        {
+            var border = new FrameworkElementFactory(typeof(Border));
+            border.SetBinding(Border.BackgroundProperty, new System.Windows.Data.Binding("[Estado]")
+            {
+                Converter = new EstadoToColorConverter()
+            });
+            border.SetValue(Border.CornerRadiusProperty, new CornerRadius(5));
+            border.SetValue(Border.PaddingProperty, new Thickness(5));
+
+            var textBlock = new FrameworkElementFactory(typeof(TextBlock));
+            textBlock.SetBinding(TextBlock.TextProperty, new System.Windows.Data.Binding("[Estado]"));
+            textBlock.SetValue(TextBlock.ForegroundProperty, Brushes.White);
+            textBlock.SetValue(TextBlock.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+            textBlock.SetValue(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center);
+            textBlock.SetValue(TextBlock.FontWeightProperty, FontWeights.Bold);
+
+            border.AppendChild(textBlock);
+
+            return border;
+        }
+
         private FrameworkElementFactory CreateOpcionesTemplate()
         {
             var stackPanelFactory = new FrameworkElementFactory(typeof(StackPanel));
@@ -133,27 +170,13 @@ namespace EVENTPULSE
             borrarImage.SetValue(Image.HeightProperty, 16.0);
             borrarButton.AppendChild(borrarImage);
 
-            // Botón Info
-            var infoButton = new FrameworkElementFactory(typeof(Button));
-            infoButton.SetValue(Button.ToolTipProperty, "Información");
-            infoButton.SetValue(Button.BackgroundProperty, Brushes.Transparent);
-            infoButton.SetValue(Button.BorderBrushProperty, Brushes.Transparent);
-            infoButton.AddHandler(Button.ClickEvent, new RoutedEventHandler(OnInfoClick));
-            var infoImage = new FrameworkElementFactory(typeof(Image));
-            infoImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/imagenes/IMGinfo.png")));
-            infoImage.SetValue(Image.WidthProperty, 16.0);
-            infoImage.SetValue(Image.HeightProperty, 16.0);
-            infoButton.AppendChild(infoImage);
-
-            // Agregar botones al StackPanel
             stackPanelFactory.AppendChild(editarButton);
             stackPanelFactory.AppendChild(borrarButton);
-            stackPanelFactory.AppendChild(infoButton);
 
             return stackPanelFactory;
         }
 
-    private void OnBuscarClick(object sender, RoutedEventArgs e)
+        private void OnBuscarClick(object sender, RoutedEventArgs e)
         {
             string filtro = txtBuscar.Text.ToLower();
             if (string.IsNullOrWhiteSpace(filtro))
@@ -174,59 +197,55 @@ namespace EVENTPULSE
             }
         }
 
-        private void OnAgregarFestivalClick(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Funcionalidad para añadir festival en desarrollo.");
-        }
-
         private void OnEditarClick(object sender, RoutedEventArgs e)
         {
-            var festival = (sender as FrameworkElement)?.DataContext as Dictionary<string, string>;
-            if (festival != null)
-            {
-                MessageBox.Show($"Editar festival: {string.Join(", ", festival.Select(kv => $"{kv.Key}: {kv.Value}"))}");
-            }
+            // Acción del botón editar
         }
 
         private void OnBorrarClick(object sender, RoutedEventArgs e)
         {
-            var festival = (sender as FrameworkElement)?.DataContext as Dictionary<string, string>;
-            if (festival != null && MessageBox.Show($"¿Estás seguro de que deseas borrar este festival?", "Confirmación", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-            {
-                Festivales.Remove(festival);
-            }
+            // Acción del botón borrar
         }
 
         private void OnInfoClick(object sender, RoutedEventArgs e)
         {
-            var festival = (sender as FrameworkElement)?.DataContext as Dictionary<string, string>;
-            if (festival != null)
+            // Obtén el festival seleccionado
+            var button = sender as Button;
+            var selectedFestival = button?.DataContext as Dictionary<string, string>;
+
+            if (selectedFestival != null)
             {
-                MessageBox.Show($"Información del festival:\n{string.Join("\n", festival.Select(kv => $"{kv.Key}: {kv.Value}"))}",
-                                "Información del Festival",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Information);
+                string info = $"Nombre: {selectedFestival["Nombre"]}\n" +
+                              $"Ubicación: {selectedFestival["Ubicación"]}\n" +
+                              $"Día: {selectedFestival["Día"]}\n" +
+                              $"Mes: {selectedFestival["Mes"]}\n" +
+                              $"Estado: {selectedFestival["Estado"]}";
+
+                MessageBox.Show(info, "Información del Festival", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("No se pudo recuperar la información del festival.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se pudo obtener la información del festival seleccionado.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        //Método para cambiar el color del estado 
 
+        private void OnAyudaClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Sección de ayuda no implementada todavía.", "Ayuda", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
-        // Método para salir del programa
         private void OnSalirClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
-
-        // Método para ver la Ayuda
-        private void OnAyudaClick(object sender, RoutedEventArgs e)
+        private void OnAgregarFestivalClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Funcionalidad de ayuda en desarrollo.", "Ayuda", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Función para añadir festivales no implementada.", "Añadir Festival", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
+
     }
+
+
 }

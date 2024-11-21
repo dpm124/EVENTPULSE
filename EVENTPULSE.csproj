@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EstadoToColorConverter.cs" />
     <Compile Include="Festivales.xaml.cs">
       <DependentUpon>Festivales.xaml</DependentUpon>
     </Compile>
