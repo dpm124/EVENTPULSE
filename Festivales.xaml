@@ -39,24 +39,7 @@
             </StackPanel>
 
             <!-- Tabla de Festivales -->
-            <DataGrid x:Name="dgFestivales" Grid.Row="1" AutoGenerateColumns="False" Margin="0,10">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="200"/>
-                    <DataGridTextColumn Header="Ubicación" Binding="{Binding Ubicacion}" Width="150"/>
-                    <DataGridTextColumn Header="Día" Binding="{Binding Dia}" Width="100"/>
-                    <DataGridTextColumn Header="Mes" Binding="{Binding Mes}" Width="100"/>
-                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="150"/>
-                    <DataGridTemplateColumn Header="Opciones" Width="150">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Content="Editar" Width="50" Margin="2" Click="OnEditarClick"/>
-                                    <Button Content="Borrar" Width="50" Margin="2" Background="#FF6961" Foreground="White" Click="OnBorrarClick"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
+            <DataGrid x:Name="dgFestivales" Grid.Row="1" AutoGenerateColumns="False" Margin="0,10" CanUserAddRows="False">
             </DataGrid>
         </Grid>
     </Grid>

@@ -113,5 +113,10 @@
   <ItemGroup>
     <Resource Include="Correos\correos.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imagenes\IMGborrar.png" />
+    <Resource Include="imagenes\IMGeditar.png" />
+    <Resource Include="imagenes\IMGinfo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
