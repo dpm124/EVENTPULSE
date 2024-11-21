@@ -5,9 +5,7 @@
     <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
-            <!-- Columna izquierda, más ancha -->
             <ColumnDefinition Width="2*" />
-            <!-- Columna derecha, más estrecha -->
         </Grid.ColumnDefinitions>
 
         <!-- Sección izquierda (logo) -->
@@ -17,18 +15,14 @@
 
         <!-- Sección derecha (inicio de sesión) -->
         <StackPanel x:Name="RightPanel" Grid.Column="1" Background="#D3D3D3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="320" Height="434">
-            <!-- Icono de usuario -->
             <Image Source="/imagenes/icon-7797704.png" Width="136" Height="123" Margin="0,20,0,20"/>
 
-            <!-- Campo Usuario o Correo -->
             <TextBlock Text="Usuario o correo" FontSize="16" FontFamily="Segoe UI" FontWeight="SemiBold" Foreground="#333333" Margin="10,10,0,5"/>
             <TextBox x:Name="UsernameTextBox" Height="30" Margin="10,0,10,20" FontFamily="Segoe UI" FontSize="14" Padding="5"/>
 
-            <!-- Campo Contraseña -->
             <TextBlock Text="Contraseña" FontSize="16" FontFamily="Segoe UI" FontWeight="SemiBold" Foreground="#333333" Margin="10,10,0,5"/>
             <PasswordBox x:Name="PasswordBox" Height="30" Margin="10,0,10,20" FontFamily="Segoe UI" FontSize="14" Padding="5"/>
 
-            <!-- Botón de Acceder -->
             <Button Content="Acceder" Width="120" Height="35" Background="#ADD8E6" Foreground="White" FontFamily="Segoe UI" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" Padding="5" BorderBrush="#007ACC" BorderThickness="2" Margin="0,20,0,0" Click="OnAccederClick"/>
         </StackPanel>
     </Grid>
