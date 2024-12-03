@@ -1,0 +1,44 @@
+﻿<Window x:Class="EVENTPULSE.InfoArtista"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Información del Artista"
+        Height="400" Width="600" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Título -->
+        <TextBlock Text="{Binding Nombre}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="10" />
+
+        <!-- Información del Artista -->
+        <StackPanel Grid.Row="1" Margin="10">
+            <TextBlock Text="Datos Personales" FontWeight="Bold" FontSize="16" Margin="0,0,0,5" />
+            <TextBlock Text="{Binding Descripcion}" TextWrapping="Wrap" Margin="0,0,0,10" />
+
+            <!-- Géneros musicales -->
+            <TextBlock Text="Géneros musicales:" FontWeight="Bold" />
+            <TextBlock Text="{Binding GenerosMusicales}" Margin="0,0,0,10" />
+
+            <!-- Sitio web -->
+            <TextBlock Text="Sitio web:" FontWeight="Bold" />
+            <TextBlock Text="{Binding SitioWeb}" Foreground="Black" Margin="0,0,0,10" />
+
+            <!-- Actuación -->
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Text="Actuación:" FontWeight="Bold" />
+                <TextBlock Text="{Binding ActuacionHora}" Margin="5,0,0,0" />
+                <TextBlock Text="{Binding ActuacionFecha}" Margin="5,0,0,0" />
+            </StackPanel>
+
+            <!-- Estado -->
+            <TextBlock Text="Estado:" FontWeight="Bold" Margin="0,10,0,0" />
+            <ComboBox x:Name="cbEstado" Width="200">
+                <ComboBoxItem Content="Confirmado" />
+                <ComboBoxItem Content="Cancelado" />
+                <ComboBoxItem Content="En espera" />
+            </ComboBox>
+        </StackPanel>
+    </Grid>
+</Window>

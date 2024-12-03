@@ -17,7 +17,7 @@ namespace EVENTPULSE
             nombreUsuario = string.Empty;
 
             // Ruta absoluta al archivo de usuarios
-            string rutaArchivo = "C:/Users/Diego/Desktop/UNI/3º/1er CUATRIMESTRE/3. INTERACCION PERSONA ORDENADOR/LAB/correos.txt";
+            string rutaArchivo = "C:/Users/jorge/Source/Repos/EVENTPULSE/Correos/correos.txt";
 
             if (File.Exists(rutaArchivo))
             {
@@ -151,6 +151,11 @@ namespace EVENTPULSE
             FestivalesWindow festivalesWindow = new FestivalesWindow();
             festivalesWindow.Show();
             this.Close(); // Cerrar la ventana de login
+        }
+        private void BtnAñadirFestival_Click(object sender, RoutedEventArgs e)
+        {
+            AgregarFestivalWindow ventana = new AgregarFestivalWindow();
+            ventana.Show(); // Abre la ventana secundaria
         }
 
         // Método para resetear la vista de login
