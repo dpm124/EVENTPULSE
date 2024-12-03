@@ -1,0 +1,12 @@
+﻿<Window x:Class="EVENTPULSE.Escenarios"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Editar Escenarios"
+        Height="400" Width="600" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <TextBlock Text="Ventana para editar escenarios" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Center" 
+                   FontSize="20" />
+    </Grid>
+</Window>

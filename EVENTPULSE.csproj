@@ -55,6 +55,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AgregarArtista.xaml.cs">
+      <DependentUpon>AgregarArtista.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EstadoToColorConverter.cs" />
+    <Compile Include="Festivales.xaml.cs">
+      <DependentUpon>Festivales.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AgregarFestivalWindow.xaml.cs">
+      <DependentUpon>AgregarFestivalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Escenarios.xaml.cs">
+      <DependentUpon>Escenarios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Artistas.xaml.cs">
+      <DependentUpon>Artistas.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AgregarArtista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InfoArtista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,10 +87,29 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="InfoArtista.xaml.cs">
+      <DependentUpon>InfoArtista.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Festivales.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AgregarFestivalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Escenarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Artistas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -105,6 +148,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Correos\correos.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imagenes\IMGborrar.png" />
+    <Resource Include="imagenes\IMGeditar.png" />
+    <Resource Include="imagenes\IMGinfo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
