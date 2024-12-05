@@ -56,6 +56,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
+                                    <Button Content="ℹ" ToolTip="Información" Width="30" Click="BtnInformacionFestival_Click" />
                                     <Button Content="✏️" ToolTip="Editar" Click="OnEditarClick" />
                                     <Button Content="❌" ToolTip="Borrar" Click="OnBorrarClick" />
                                 </StackPanel>

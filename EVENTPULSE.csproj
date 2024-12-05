@@ -58,6 +58,12 @@
     <Compile Include="AgregarArtista.xaml.cs">
       <DependentUpon>AgregarArtista.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AgregarEscenario.xaml.cs">
+      <DependentUpon>AgregarEscenario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda.xaml.cs">
+      <DependentUpon>Ayuda.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EstadoToColorConverter.cs" />
     <Compile Include="Festivales.xaml.cs">
       <DependentUpon>Festivales.xaml</DependentUpon>
@@ -74,6 +80,14 @@
     <Page Include="AgregarArtista.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AgregarEscenario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Ayuda.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="InfoArtista.xaml">
       <SubType>Designer</SubType>

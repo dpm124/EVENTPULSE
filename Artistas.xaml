@@ -9,63 +9,30 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Barra de búsqueda y ordenación -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
-            <!-- Etiqueta y cuadro de búsqueda -->
-            <StackPanel Orientation="Vertical" Margin="5">
-                <Label Content="Buscar por nombre o género:" />
-                <TextBox x:Name="txtBuscarArtista" Width="200" Margin="5" ToolTip="Escribe el nombre o género del artista para buscar." />
-            </StackPanel>
-
-            <!-- Etiqueta y filtro de ordenación -->
-            <StackPanel Orientation="Vertical" Margin="5">
-                <Label Content="Ordenar por:" />
-                <ComboBox x:Name="cbOrdenarPor" Width="150" Margin="5" ToolTip="Selecciona el criterio de ordenación.">
-                    <ComboBoxItem Content="Nombre" />
-                    <ComboBoxItem Content="Género" />
-                    <ComboBoxItem Content="Edad" />
-                    <ComboBoxItem Content="Caché" />
-                </ComboBox>
-            </StackPanel>
-
-            <!-- Etiqueta y orden ascendente/descendente -->
-            <StackPanel Orientation="Vertical" Margin="5">
-                <Label Content="Ordenación:" />
-                <ComboBox x:Name="cbOrdenacion" Width="150" Margin="5" ToolTip="Selecciona si deseas un orden ascendente o descendente.">
-                    <ComboBoxItem Content="Ascendente" />
-                    <ComboBoxItem Content="Descendente" />
-                </ComboBox>
-            </StackPanel>
-
-            <!-- Botón para añadir artista -->
-            <Button Content="Añadir Artista" Width="150" Height="40" Margin="5" Background="Gray" Foreground="White" Click="BtnAgregarArtista_Click" />
+        <!-- Filtros -->
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <Label Content="Buscar Artista:" VerticalAlignment="Center" />
+            <TextBox x:Name="txtBuscarArtista" Width="200" Margin="5" />
+            <Button Content="Filtrar" Width="100" Margin="5" Click="BtnFiltrarArtistas_Click" />
+            <Button Content="Reiniciar" Width="100" Margin="5" Click="BtnReiniciarFiltroArtistas_Click" />
+            <Button Content="Añadir Artista" Width="150" Margin="5" Click="BtnAgregarArtista_Click" />
         </StackPanel>
 
-        <!-- Tabla de artistas -->
+        <!-- Tabla -->
         <DataGrid x:Name="dgArtistas" Grid.Row="1" AutoGenerateColumns="False" Margin="10" IsReadOnly="True" CanUserAddRows="False">
             <DataGrid.Columns>
-                <!-- Nombre -->
                 <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
-
-                <!-- Apellido -->
                 <DataGridTextColumn Header="Apellido" Binding="{Binding Apellido}" Width="*" />
-
-                <!-- Edad -->
                 <DataGridTextColumn Header="Edad" Binding="{Binding Edad}" Width="50" />
-
-                <!-- Caché -->
                 <DataGridTextColumn Header="Caché" Binding="{Binding Cache}" Width="100" />
-
-                <!-- Género -->
                 <DataGridTextColumn Header="Género" Binding="{Binding Genero}" Width="*" />
-
-                <!-- Opciones -->
                 <DataGridTemplateColumn Header="Opciones">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="ℹ" ToolTip="Información" Width="30" Height="30" Click="BtnInfo_Click" />
-                                <Button Content="🗑" ToolTip="Eliminar" Width="30" Height="30" Click="BtnEliminar_Click" />
+                                <Button Content="ℹ" ToolTip="Información" Width="30" Click="BtnInformacionArtista_Click" />
+                                <Button Content="✏️" ToolTip="Editar" Width="30" Click="BtnEditarArtista_Click" />
+                                <Button Content="❌" ToolTip="Eliminar" Width="30" Click="BtnEliminar_Click" />
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

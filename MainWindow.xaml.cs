@@ -17,8 +17,8 @@ namespace EVENTPULSE
             nombreUsuario = string.Empty;
 
             // Ruta absoluta al archivo de usuarios
-            string rutaArchivo = "C:/Users/jorge/Source/Repos/EVENTPULSE/Correos/correos.txt";
-
+            //string rutaArchivo = "C:/Users/jorge/Source/Repos/EVENTPULSE/Correos/correos.txt";
+            string rutaArchivo = "C:/Users/Diego/source/repos/EVENTPULSE/Correos/correos.txt";
             if (File.Exists(rutaArchivo))
             {
                 var lineas = File.ReadAllLines(rutaArchivo);

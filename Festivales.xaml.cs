@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.IO;
+
 
 namespace EVENTPULSE
 {
@@ -12,19 +14,55 @@ namespace EVENTPULSE
 
         public ObservableCollection<Festival> Festivales { get; set; }
 
+        private void GuardarFestivales()
+        {
+            var lineas = festivalesOriginal.Select(f =>
+                $"{f.Nombre}|{f.Ubicación}|{f.Fecha:yyyy-MM-dd}|{f.Estado}").ToList();
+            File.WriteAllLines(ArchivoFestivales, lineas);
+        }
+
+        private void CargarFestivales()
+        {
+            if (!File.Exists(ArchivoFestivales)) return;
+
+            var lineas = File.ReadAllLines(ArchivoFestivales);
+            foreach (var linea in lineas)
+            {
+                var datos = linea.Split('|');
+                festivalesOriginal.Add(new Festival
+                {
+                    Nombre = datos[0],
+                    Ubicación = datos[1],
+                    Fecha = DateTime.Parse(datos[2]),
+                    Estado = datos[3]
+                });
+            }
+            Festivales = new ObservableCollection<Festival>(festivalesOriginal);
+            dgFestivales.ItemsSource = Festivales;
+        }
         public FestivalesWindow()
         {
             InitializeComponent();
             festivalesOriginal = new ObservableCollection<Festival>();
             Festivales = new ObservableCollection<Festival>(festivalesOriginal);
+            CargarFestivales();
             dgFestivales.ItemsSource = Festivales;
         }
+
 
         // Manejador del botón Ayuda
         private void OnAyudaClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Esta es la sección de ayuda.", "Ayuda", MessageBoxButton.OK, MessageBoxImage.Information);
+            // Crear una nueva instancia de la ventana de ayuda
+            Ayuda ayuda = new Ayuda();
+
+            // Mostrar la ventana de ayuda
+            ayuda.ShowDialog(); // Usar ShowDialog para que sea modal (bloquea la ventana principal hasta que se cierre)
         }
+
+        // Manejador para guardar los festivales en .txt 
+
+        private const string ArchivoFestivales = "festivalesPrueba.txt";
 
         // Manejador del botón Salir
         private void OnSalirClick(object sender, RoutedEventArgs e)
@@ -34,7 +72,7 @@ namespace EVENTPULSE
                 this.Close();
             }
         }
-
+        
         // Manejador del botón Filtrar
         private void OnFiltrarClick(object sender, RoutedEventArgs e)
         {
@@ -106,6 +144,7 @@ namespace EVENTPULSE
                 if (ventanaEditar.ShowDialog() == true)
                 {
                     dgFestivales.Items.Refresh();
+                    GuardarFestivales();
                     MessageBox.Show("Los cambios han sido guardados correctamente.", "Edición completada", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
@@ -120,18 +159,38 @@ namespace EVENTPULSE
         {
             if (dgFestivales.SelectedItem is Festival festivalSeleccionado)
             {
-                if (MessageBox.Show($"¿Eliminar el festival {festivalSeleccionado.Nombre}?", "Confirmar", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show($"¿Eliminar el festival {festivalSeleccionado.Nombre}?", "Confirmar Eliminación", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     Festivales.Remove(festivalSeleccionado);
                     festivalesOriginal.Remove(festivalSeleccionado);
+                    GuardarFestivales();
+                    MessageBox.Show("Festival eliminado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else
             {
-                MessageBox.Show("Por favor selecciona un festival para eliminar.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Por favor selecciona un festival para eliminar.", "Eliminar Festival", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        private void BtnInformacionFestival_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgFestivales.SelectedItem is Festival festivalSeleccionado)
+            {
+                MessageBox.Show($"Nombre: {festivalSeleccionado.Nombre}\n" +
+                                $"Ubicación: {festivalSeleccionado.Ubicación}\n" +
+                                $"Fecha: {festivalSeleccionado.Fecha.ToShortDateString()}\n" +
+                                $"Estado: {festivalSeleccionado.Estado}",
+                                "Información del Festival", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Por favor, selecciona un festival para ver la información.", "Información", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
     }
+
 
     public class Festival
     {

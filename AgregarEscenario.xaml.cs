@@ -6,39 +6,52 @@ namespace EVENTPULSE
     {
         public Escenario EscenarioEditado { get; private set; }
 
-        // Constructor para agregar un nuevo escenario
         public AgregarEscenario()
         {
             InitializeComponent();
-            EscenarioEditado = new Escenario();
-            DataContext = EscenarioEditado;
+            EscenarioEditado = new Escenario(); // Crear un nuevo objeto
         }
 
-        // Constructor para editar un escenario existente
         public AgregarEscenario(Escenario escenarioExistente)
         {
             InitializeComponent();
-            EscenarioEditado = escenarioExistente;
-            DataContext = EscenarioEditado;
+            EscenarioEditado = escenarioExistente; // Referencia al objeto existente
+
+            // Cargar los valores existentes en los controles
+            txtNombre.Text = escenarioExistente.Nombre;
+            txtAforo.Text = escenarioExistente.Aforo.ToString();
+            txtNumeroSalidas.Text = escenarioExistente.NumeroSalidas.ToString();
+            txtNumeroAsesos.Text = escenarioExistente.NumeroAsesos.ToString();
+            txtNumeroServiciosMedicos.Text = escenarioExistente.NumeroServiciosMedicos.ToString();
         }
 
-        // Guardar cambios
         private void BtnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(EscenarioEditado.Nombre))
+            // Validar los campos
+            if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                string.IsNullOrWhiteSpace(txtAforo.Text) ||
+                string.IsNullOrWhiteSpace(txtNumeroSalidas.Text) ||
+                string.IsNullOrWhiteSpace(txtNumeroAsesos.Text) ||
+                string.IsNullOrWhiteSpace(txtNumeroServiciosMedicos.Text))
             {
-                MessageBox.Show("El nombre no puede estar vacío.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Por favor, completa todos los campos.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            DialogResult = true;
+            // Asignar los valores al escenario
+            EscenarioEditado.Nombre = txtNombre.Text;
+            EscenarioEditado.Aforo = int.Parse(txtAforo.Text);
+            EscenarioEditado.NumeroSalidas = int.Parse(txtNumeroSalidas.Text);
+            EscenarioEditado.NumeroAsesos = int.Parse(txtNumeroAsesos.Text);
+            EscenarioEditado.NumeroServiciosMedicos = int.Parse(txtNumeroServiciosMedicos.Text);
+
+            DialogResult = true; // Indicar éxito
             Close();
         }
 
-        // Cancelar operación
         private void BtnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false;
+            DialogResult = false; // Cancelar operación
             Close();
         }
     }

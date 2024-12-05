@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 namespace EVENTPULSE
 {
@@ -7,15 +6,30 @@ namespace EVENTPULSE
     {
         public ArtistaModel NuevoArtista { get; private set; }
 
+        // Constructor para agregar un nuevo artista
         public AgregarArtista()
         {
             InitializeComponent();
-            NuevoArtista = new ArtistaModel();
+            NuevoArtista = new ArtistaModel(); // Inicializar un nuevo objeto ArtistaModel
+        }
+
+        // Constructor para editar un artista existente
+        public AgregarArtista(ArtistaModel artistaExistente)
+        {
+            InitializeComponent();
+            NuevoArtista = artistaExistente;
+
+            // Cargar los datos del artista en los campos de texto
+            txtNombre.Text = artistaExistente.Nombre;
+            txtApellido.Text = artistaExistente.Apellido;
+            txtEdad.Text = artistaExistente.Edad.ToString();
+            txtCache.Text = artistaExistente.Cache;
+            txtGenero.Text = artistaExistente.Genero;
         }
 
         private void BtnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            // Validar los campos antes de guardar
+            // Validar que todos los campos estén completos
             if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
                 string.IsNullOrWhiteSpace(txtApellido.Text) ||
                 string.IsNullOrWhiteSpace(txtEdad.Text) ||
@@ -26,9 +40,10 @@ namespace EVENTPULSE
                 return;
             }
 
-            // Asignar los valores al nuevo artista
+            // Asignar los valores a NuevoArtista
             NuevoArtista.Nombre = txtNombre.Text;
             NuevoArtista.Apellido = txtApellido.Text;
+
             if (int.TryParse(txtEdad.Text, out int edad))
             {
                 NuevoArtista.Edad = edad;
@@ -38,16 +53,17 @@ namespace EVENTPULSE
                 MessageBox.Show("La edad debe ser un número válido.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+
             NuevoArtista.Cache = txtCache.Text;
             NuevoArtista.Genero = txtGenero.Text;
 
-            DialogResult = true; // Indicar que se guardó correctamente
+            DialogResult = true; // Indicar que los datos se guardaron correctamente
             Close();
         }
 
         private void BtnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            DialogResult = false; // Cancelar la operación
+            DialogResult = false; // Indicar que se canceló la operación
             Close();
         }
     }
