@@ -10,6 +10,7 @@ namespace EVENTPULSE
         public AgregarArtista()
         {
             InitializeComponent();
+<<<<<<< Updated upstream
             NuevoArtista = new ArtistaModel();
         }
 
@@ -32,19 +33,66 @@ namespace EVENTPULSE
             if (int.TryParse(txtEdad.Text, out int edad))
             {
                 NuevoArtista.Edad = edad;
+=======
+            NuevoArtista = new ArtistaModel(); // Inicializar un nuevo objeto ArtistaModel
+        }
+
+        // Constructor para editar un artista existente
+        public AgregarArtista(ArtistaModel artista)
+        {
+            InitializeComponent();
+
+            // Cargar los datos del artista en los campos de texto
+            txtNombre.Text = artista.Nombre;
+            txtApellido.Text = artista.Apellido;
+            txtEdad.Text = artista.Edad.ToString();
+            txtGenero.Text = artista.Genero;
+            txtDescripcion.Text = artista.Descripcion;
+            txtGenerosMusicales.Text = artista.GenerosMusicales;
+            txtSitioWeb.Text = artista.SitioWeb;
+            if (DateTime.TryParse(artista.ActuacionFecha, out DateTime fecha))
+            {
+                dpActuacionFecha.SelectedDate = fecha;
+>>>>>>> Stashed changes
             }
             else
             {
-                MessageBox.Show("La edad debe ser un número válido.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                dpActuacionFecha.SelectedDate = null;
             }
+<<<<<<< Updated upstream
             NuevoArtista.Cache = txtCache.Text;
             NuevoArtista.Genero = txtGenero.Text;
+=======
+            txtActuacionHora.Text = artista.ActuacionHora;
+            txtLugar.Text = artista.Lugar;
+            cmbEstado.Text = artista.Estado;
+        }
+
+        // Método para guardar los datos del nuevo artista
+        private void BtnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            // Asignar los datos del formulario
+            NuevoArtista = new ArtistaModel
+            {
+                Nombre = txtNombre.Text,
+                Apellido = txtApellido.Text,
+                Edad = int.TryParse(txtEdad.Text, out int edad) ? edad : 0,
+                Genero = txtGenero.Text,
+                Descripcion = txtDescripcion.Text,
+                GenerosMusicales = txtGenerosMusicales.Text,
+                SitioWeb = txtSitioWeb.Text,
+                ActuacionFecha = dpActuacionFecha.SelectedDate?.ToString("yyyy-MM-dd") ?? "Sin fecha",
+                ActuacionHora = txtActuacionHora.Text,
+                Lugar = txtLugar.Text,
+                Estado = cmbEstado.Text
+            };
+>>>>>>> Stashed changes
 
             DialogResult = true; // Indicar que se guardó correctamente
             Close();
         }
 
+        // Método para cancelar la acción
         private void BtnCancelar_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false; // Cancelar la operación

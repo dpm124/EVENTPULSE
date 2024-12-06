@@ -1,3 +1,4 @@
 alex.salinero@alu.uclm.es,alex,Alex Salinero
 diego.palomino1@alu.uclm.es,diego,Diego Palomino
 jorge.rodriguez11@alu.uclm.es,jorge,Jorge Rodriguez
+root,root,root

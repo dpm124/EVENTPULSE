@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EVENTPULSE", "EVENTPULSE.csproj", "{405148B1-11E3-4B01-AFA8-1920EE6118B4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{4F4B0117-87DA-4515-B40E-60332C34FDCB}"
-	ProjectSection(SolutionItems) = preProject
-		ArtistaModel.cs = ArtistaModel.cs
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

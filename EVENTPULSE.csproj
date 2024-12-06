@@ -58,18 +58,24 @@
     <Compile Include="AgregarArtista.xaml.cs">
       <DependentUpon>AgregarArtista.xaml</DependentUpon>
     </Compile>
+<<<<<<< Updated upstream
+=======
+    <Compile Include="AgregarEscenario.xaml.cs">
+      <DependentUpon>AgregarEscenario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ArtistaModel.cs" />
+    <Compile Include="Ayuda.xaml.cs">
+      <DependentUpon>Ayuda.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters.cs" />
+    <Compile Include="EscenarioModel.cs" />
+>>>>>>> Stashed changes
     <Compile Include="EstadoToColorConverter.cs" />
     <Compile Include="Festivales.xaml.cs">
       <DependentUpon>Festivales.xaml</DependentUpon>
     </Compile>
     <Compile Include="AgregarFestivalWindow.xaml.cs">
       <DependentUpon>AgregarFestivalWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Escenarios.xaml.cs">
-      <DependentUpon>Escenarios.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Artistas.xaml.cs">
-      <DependentUpon>Artistas.xaml</DependentUpon>
     </Compile>
     <Page Include="AgregarArtista.xaml">
       <SubType>Designer</SubType>
@@ -99,14 +105,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AgregarFestivalWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Escenarios.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Artistas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
