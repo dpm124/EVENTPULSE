@@ -12,7 +12,7 @@ namespace EVENTPULSE
 {
     public partial class AgregarFestivalWindow : Window
     {
-        public EscenarioModel EscenarioEditado { get; set;  }
+        public EscenarioModel EscenarioEditado { get; set; }
         public Festival FestivalEditado { get; private set; }
         public ObservableCollection<ArtistaModel> Artistas { get; private set; } = new ObservableCollection<ArtistaModel>();
         public ObservableCollection<EscenarioModel> Escenarios { get; set; }
@@ -363,37 +363,28 @@ namespace EVENTPULSE
         }
 
         // Manejo del evento para agregar un nuevo escenario
-        private void BtnAgregarEscenario_Click(object sender, RoutedEventArgs e)
-        {
-            var nuevoEscenario = new EscenarioModel
-            {
-                Nombre = "Nuevo Escenario",
-                TieneInformacion = false
-            };
-
-            Escenarios.Add(nuevoEscenario); // Añadir el nuevo escenario a la lista
-        }
-
         private void BtnInformacionEscenario_Click(object sender, RoutedEventArgs e)
         {
-            // Obtén el botón que fue presionado
             Button btn = sender as Button;
+            if (btn?.Tag == null)
+            {
+                MessageBox.Show("No se ha podido identificar el escenario.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-            // Obtén el índice del escenario desde la colección (asumimos que los botones están vinculados a la lista de escenarios)
-            int index = (int)btn.Tag;  // Asegúrate de haber asignado el índice del escenario en el Tag del botón en XAML
-
+            int index = (int)btn.Tag;
             var escenario = Escenarios[index];
 
             if (escenario.TieneInformacion)
             {
-                // Muestra la información del escenario en un mensaje
-                MessageBox.Show($"Escenario: {escenario.Nombre}\n" +
-                                $"Artista: {escenario.Artista}\n" +
-                                $"Fecha: {escenario.Fecha}\n" +
-                                $"Aforo Max: {escenario.AforoMax}",
-                                "Información del Escenario",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Information);
+                MessageBox.Show(
+                    $"Escenario: {escenario.Nombre}\n" +
+                    $"Artista: {escenario.Artista}\n" +
+                    $"Fecha: {escenario.Fecha}\n" +
+                    $"Aforo Max: {escenario.AforoMax}",
+                    "Información del Escenario",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
             }
             else
             {
@@ -406,54 +397,55 @@ namespace EVENTPULSE
 
         private void BtnEditarEscenario_Click(object sender, RoutedEventArgs e)
         {
-            // Obtener el botón que fue presionado
             Button btn = sender as Button;
+            if (btn?.Tag == null)
+            {
+                MessageBox.Show("No se ha podido identificar el escenario a editar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-            // Obtener el índice del escenario desde la colección de escenarios (usamos el Tag para almacenar el índice)
             int index = (int)btn.Tag;
-
             var escenarioSeleccionado = Escenarios[index];
 
-            // Verificar si el escenario tiene información para editar
-            if (escenarioSeleccionado != null)
+            if (!escenarioSeleccionado.TieneInformacion)
             {
-                // Crear una nueva ventana de edición para el escenario seleccionado
-                var ventanaEditarEscenario = new AgregarEscenario(escenarioSeleccionado);
-
-                // Mostrar la ventana de edición
-                if (ventanaEditarEscenario.ShowDialog() == true)
-                {
-                    // Actualizar los valores del escenario seleccionado con los nuevos datos
-                    escenarioSeleccionado.Nombre = ventanaEditarEscenario.EscenarioEditado.Nombre;
-                    escenarioSeleccionado.Aforo = ventanaEditarEscenario.EscenarioEditado.Aforo;
-                    escenarioSeleccionado.NumeroSalidas = ventanaEditarEscenario.EscenarioEditado.NumeroSalidas;
-                    escenarioSeleccionado.NumeroAsesos = ventanaEditarEscenario.EscenarioEditado.NumeroAsesos;
-                    escenarioSeleccionado.NumeroServiciosMedicos = ventanaEditarEscenario.EscenarioEditado.NumeroServiciosMedicos;
-
-                    // Guardar los cambios en el archivo o en la base de datos
-                    GuardarFestivalEnArchivo();
-
-                    // Refrescar la interfaz de usuario si es necesario
-                    MessageBox.Show("Escenario editado correctamente.", "Editar Escenario", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                MessageBox.Show("Este escenario no tiene información para editar. Añade información primero.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
-            else
+
+            var ventanaEditarEscenario = new AgregarEscenario(escenarioSeleccionado);
+            if (ventanaEditarEscenario.ShowDialog() == true)
             {
-                MessageBox.Show("Por favor, selecciona un escenario para editar.", "Editar Escenario", MessageBoxButton.OK, MessageBoxImage.Warning);
+                // EscenarioEditado se actualiza dentro de la ventana AgregarEscenario
+                // Guardar la nueva información en el archivo (si así lo deseas)
+                GuardarEscenariosEnArchivo();
+
+                MessageBox.Show("Escenario editado correctamente.",
+                                "Editar Escenario",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Information);
             }
         }
 
         private void BtnEliminarEscenario_Click(object sender, RoutedEventArgs e)
         {
-            // Obtén el botón que fue presionado
             Button btn = sender as Button;
+            if (btn?.Tag == null)
+            {
+                MessageBox.Show("No se ha podido identificar el escenario a eliminar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-            // Obtén el índice del escenario desde la colección (usamos el Tag para almacenar el índice)
             int index = (int)btn.Tag;
-
             var escenario = Escenarios[index];
 
-            // Confirmar si el usuario realmente quiere eliminar el escenario
+            if (!escenario.TieneInformacion)
+            {
+                MessageBox.Show("Este escenario no tiene información que eliminar.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Confirmación
             var result = MessageBox.Show($"¿Estás seguro de eliminar el escenario: {escenario.Nombre}?",
                                          "Confirmar Eliminación",
                                          MessageBoxButton.YesNo,
@@ -461,47 +453,64 @@ namespace EVENTPULSE
 
             if (result == MessageBoxResult.Yes)
             {
-                // Elimina el escenario de la lista
-                Escenarios.RemoveAt(index);
+                // Elimina la información del escenario
+                escenario.TieneInformacion = false;
+                escenario.Artista = null;
+                escenario.Fecha = null;
+                escenario.AforoMax = 0;
 
-                // Actualiza la interfaz o realiza cualquier otro paso necesario después de la eliminación
-                MessageBox.Show("Escenario eliminado correctamente.",
+                // Actualizar el archivo
+                GuardarEscenariosEnArchivo();
+
+                MessageBox.Show("Información del escenario eliminada correctamente.",
                                 "Eliminación Exitosa",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
             }
         }
 
-        private void BtnGuardarEscenario(object sender, RoutedEventArgs e)
+        private void BtnAgregarInformacionEscenario_Click(object sender, RoutedEventArgs e)
         {
-            // Validar los campos
-            //if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
-            //    string.IsNullOrWhiteSpace(txtAforo.Text) ||
-            //    string.IsNullOrWhiteSpace(txtNumeroSalidas.Text) ||
-            //    string.IsNullOrWhiteSpace(txtNumeroAsesos.Text) ||
-            //    string.IsNullOrWhiteSpace(txtNumeroServiciosMedicos.Text))
-            //{
-            //    MessageBox.Show("Por favor, completa todos los campos.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            //   return;
-            //}
+            Button btn = sender as Button;
+            if (btn?.Tag == null)
+            {
+                MessageBox.Show("No se ha podido identificar el escenario.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
+            int index = (int)btn.Tag;
+            var escenario = Escenarios[index];
 
+            // Crear una instancia de la ventana AgregarEscenario sin información previa
+            var ventanaAgregarEscenario = new AgregarEscenario(escenario);
+            if (ventanaAgregarEscenario.ShowDialog() == true)
+            {
+                // EscenarioEditado (en ventanaAgregarEscenario) actualiza el objeto escenario
+                // Marcar TieneInformacion en true si se completó con éxito
+                escenario.TieneInformacion = true;
 
-            // Asignar los valores al escenario
-            //EscenarioEditado.Nombre = txtNombre.Text;
-            //EscenarioEditado.Aforo = int.Parse(txtAforo.Text);
-            //EscenarioEditado.NumeroSalidas = int.Parse(txtNumeroSalidas.Text);
-            //EscenarioEditado.NumeroAsesos = int.Parse(txtNumeroAsesos.Text);
-            //EscenarioEditado.NumeroServiciosMedicos = int.Parse(txtNumeroServiciosMedicos.Text);
+                // Guardar en el archivo
+                GuardarEscenariosEnArchivo();
 
-            // Establecer el resultado de la ventana como true para indicar éxito
-            //DialogResult = true;
-            //Close();
-            MessageBox.Show("Por favor, completa todos los campos relacionados con el escenario.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-            return;
-
+                MessageBox.Show("Información agregada correctamente al escenario.",
+                                "Agregar Información",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Information);
+            }
         }
 
+        // Este método es un ejemplo de cómo guardar los escenarios en un archivo de texto
+        // Ajusta la lógica según necesites (nombre del archivo, formato, etc.)
+        private void GuardarEscenariosEnArchivo()
+        {
+            using (var writer = new StreamWriter("escenarios.txt", false))
+            {
+                foreach (var esc in Escenarios)
+                {
+                    writer.WriteLine($"{esc.Nombre}|{esc.Aforo}|{esc.NumeroSalidas}|{esc.NumeroAsesos}|{esc.NumeroServiciosMedicos}|{esc.Artista}|{esc.Fecha}|{esc.AforoMax}|{esc.TieneInformacion}");
+                }
+            }
+        }
     }
 }
 

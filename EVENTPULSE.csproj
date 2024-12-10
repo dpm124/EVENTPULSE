@@ -58,18 +58,12 @@
     <Compile Include="AgregarArtista.xaml.cs">
       <DependentUpon>AgregarArtista.xaml</DependentUpon>
     </Compile>
-<<<<<<< Updated upstream
-=======
     <Compile Include="AgregarEscenario.xaml.cs">
       <DependentUpon>AgregarEscenario.xaml</DependentUpon>
     </Compile>
     <Compile Include="ArtistaModel.cs" />
-    <Compile Include="Ayuda.xaml.cs">
-      <DependentUpon>Ayuda.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Converters.cs" />
     <Compile Include="EscenarioModel.cs" />
->>>>>>> Stashed changes
     <Compile Include="EstadoToColorConverter.cs" />
     <Compile Include="Festivales.xaml.cs">
       <DependentUpon>Festivales.xaml</DependentUpon>
@@ -78,6 +72,14 @@
       <DependentUpon>AgregarFestivalWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AgregarArtista.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AgregarEscenario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Help.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -92,6 +94,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Help.xaml.cs">
+      <DependentUpon>Help.xaml</DependentUpon>
     </Compile>
     <Compile Include="InfoArtista.xaml.cs">
       <DependentUpon>InfoArtista.xaml</DependentUpon>

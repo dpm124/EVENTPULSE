@@ -1,11 +1,60 @@
-﻿using EVENTPULSE;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 
-public partial class InfoArtista : Window
+namespace EVENTPULSE
 {
-    public InfoArtista(ArtistaModel artista)
+    public partial class InfoArtista : Window
     {
-        InitializeComponent();
-        DataContext = artista; // Vincular los datos al XAML
+        // Constructor que recibe un modelo de artista
+        public InfoArtista(ArtistaModel artista)
+        {
+            InitializeComponent();
+
+            // Vincular el modelo de datos al contexto de datos del XAML
+            DataContext = artista;
+
+            // Configurar el estado inicial del ComboBox según el estado del artista
+            SetEstadoInicial(artista.Estado);
+        }
+
+        // Método para establecer el estado inicial en el ComboBox
+        private void SetEstadoInicial(string estado)
+        {
+            if (cbEstado != null)
+            {
+                foreach (var item in cbEstado.Items)
+                {
+                    if (item is ComboBoxItem comboBoxItem && comboBoxItem.Content.ToString() == estado)
+                    {
+                        cbEstado.SelectedItem = comboBoxItem;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Método para guardar los cambios realizados al artista
+        private void BtnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is ArtistaModel artista)
+            {
+                // Actualizar el estado del artista con la selección actual
+                if (cbEstado.SelectedItem is ComboBoxItem selectedItem)
+                {
+                    artista.Estado = selectedItem.Content.ToString();
+                }
+
+                MessageBox.Show("Información del artista actualizada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+            // Cerrar la ventana después de guardar los cambios
+            Close();
+        }
+
+        // Método para cancelar y cerrar la ventana sin guardar cambios
+        private void BtnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

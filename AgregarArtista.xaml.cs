@@ -10,30 +10,6 @@ namespace EVENTPULSE
         public AgregarArtista()
         {
             InitializeComponent();
-<<<<<<< Updated upstream
-            NuevoArtista = new ArtistaModel();
-        }
-
-        private void BtnGuardar_Click(object sender, RoutedEventArgs e)
-        {
-            // Validar los campos antes de guardar
-            if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
-                string.IsNullOrWhiteSpace(txtApellido.Text) ||
-                string.IsNullOrWhiteSpace(txtEdad.Text) ||
-                string.IsNullOrWhiteSpace(txtCache.Text) ||
-                string.IsNullOrWhiteSpace(txtGenero.Text))
-            {
-                MessageBox.Show("Por favor, completa todos los campos.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            // Asignar los valores al nuevo artista
-            NuevoArtista.Nombre = txtNombre.Text;
-            NuevoArtista.Apellido = txtApellido.Text;
-            if (int.TryParse(txtEdad.Text, out int edad))
-            {
-                NuevoArtista.Edad = edad;
-=======
             NuevoArtista = new ArtistaModel(); // Inicializar un nuevo objeto ArtistaModel
         }
 
@@ -53,16 +29,11 @@ namespace EVENTPULSE
             if (DateTime.TryParse(artista.ActuacionFecha, out DateTime fecha))
             {
                 dpActuacionFecha.SelectedDate = fecha;
->>>>>>> Stashed changes
             }
             else
             {
                 dpActuacionFecha.SelectedDate = null;
             }
-<<<<<<< Updated upstream
-            NuevoArtista.Cache = txtCache.Text;
-            NuevoArtista.Genero = txtGenero.Text;
-=======
             txtActuacionHora.Text = artista.ActuacionHora;
             txtLugar.Text = artista.Lugar;
             cmbEstado.Text = artista.Estado;
@@ -86,7 +57,6 @@ namespace EVENTPULSE
                 Lugar = txtLugar.Text,
                 Estado = cmbEstado.Text
             };
->>>>>>> Stashed changes
 
             DialogResult = true; // Indicar que se guardó correctamente
             Close();
