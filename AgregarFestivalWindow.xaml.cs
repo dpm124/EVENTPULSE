@@ -485,13 +485,12 @@ namespace EVENTPULSE
             }
         }
 
-
         private void BtnAgregarInformacionEscenario_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             if (btn?.Tag == null)
             {
-                MessageBox.Show("No se ha podido identificar el escenario para agregar información.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se ha podido identificar el escenario.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -503,29 +502,25 @@ namespace EVENTPULSE
             }
             var escenario = Escenarios[index];
 
-            // Simular obtención de datos del usuario
-            // Por ejemplo, podrías abrir una ventana AgregarEscenario y obtener el nombre y el artista
-            // Aquí se utilizan valores de ejemplo:
-            string nuevoNombre = "Escenario X";
-            string nuevoArtista = "Artista Y";
+            // Abrir la ventana AgregarEscenario
+            var ventanaAgregarEscenario = new AgregarEscenario();
+            if (ventanaAgregarEscenario.ShowDialog() == true)
+            {
+                // El usuario ha guardado la información, ventanaAgregarEscenario.EscenarioEditado contiene los datos
+                escenario.TieneInformacion = true;
+                escenario.Nombre = ventanaAgregarEscenario.EscenarioEditado.Nombre;
+                escenario.Artista = ventanaAgregarEscenario.EscenarioEditado.Artista;
+               
+                GuardarEscenariosEnArchivo();
 
-            // Asignar las propiedades del escenario y marcar que tiene información
-            escenario.TieneInformacion = true;
-            escenario.Nombre = nuevoNombre;
-            escenario.Artista = nuevoArtista;
-
-            // Guardar cambios en el archivo, si corresponde
-            GuardarEscenariosEnArchivo();
-
-            MessageBox.Show("Información agregada correctamente al escenario.",
-                            "Agregar Información",
-                            MessageBoxButton.OK,
-                            MessageBoxImage.Information);
+                MessageBox.Show("Información agregada correctamente al escenario.",
+                                "Agregar Información",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Information);
+            }
         }
 
 
-        // Este método es un ejemplo de cómo guardar los escenarios en un archivo de texto
-        // Ajusta la lógica según necesites (nombre del archivo, formato, etc.)
         private void GuardarEscenariosEnArchivo()
         {
             using (var writer = new StreamWriter("escenarios.txt", false))
