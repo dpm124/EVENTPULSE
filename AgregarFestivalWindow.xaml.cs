@@ -372,7 +372,13 @@ namespace EVENTPULSE
                 return;
             }
 
-            int index = (int)btn.Tag;
+            int index;
+            if (!int.TryParse(btn.Tag.ToString(), out index))
+            {
+                MessageBox.Show("El valor del Tag no es un número válido.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var escenario = Escenarios[index];
 
             if (escenario.TieneInformacion)
@@ -404,7 +410,13 @@ namespace EVENTPULSE
                 return;
             }
 
-            int index = (int)btn.Tag;
+            int index;
+            if (!int.TryParse(btn.Tag.ToString(), out index))
+            {
+                MessageBox.Show("El valor del Tag no es un número válido.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var escenarioSeleccionado = Escenarios[index];
 
             if (!escenarioSeleccionado.TieneInformacion)
@@ -436,7 +448,12 @@ namespace EVENTPULSE
                 return;
             }
 
-            int index = (int)btn.Tag;
+            int index;
+            if (!int.TryParse(btn.Tag.ToString(), out index))
+            {
+                MessageBox.Show("El valor del Tag no es un número válido.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             var escenario = Escenarios[index];
 
             if (!escenario.TieneInformacion)
@@ -445,21 +462,20 @@ namespace EVENTPULSE
                 return;
             }
 
-            // Confirmación
-            var result = MessageBox.Show($"¿Estás seguro de eliminar el escenario: {escenario.Nombre}?",
+            var result = MessageBox.Show($"¿Estás seguro de eliminar la información del escenario: {escenario.Nombre}?",
                                          "Confirmar Eliminación",
                                          MessageBoxButton.YesNo,
                                          MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes)
             {
-                // Elimina la información del escenario
+                // Marcar el escenario sin información
                 escenario.TieneInformacion = false;
+                // Opcional: Restaurar el nombre y limpiar el artista
+                escenario.Nombre = $"Escenario {index + 1}";
                 escenario.Artista = null;
-                escenario.Fecha = null;
-                escenario.AforoMax = 0;
 
-                // Actualizar el archivo
+                // Guardar en el archivo si corresponde
                 GuardarEscenariosEnArchivo();
 
                 MessageBox.Show("Información del escenario eliminada correctamente.",
@@ -469,35 +485,44 @@ namespace EVENTPULSE
             }
         }
 
+
         private void BtnAgregarInformacionEscenario_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
             if (btn?.Tag == null)
             {
-                MessageBox.Show("No se ha podido identificar el escenario.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("No se ha podido identificar el escenario para agregar información.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            int index = (int)btn.Tag;
+            int index;
+            if (!int.TryParse(btn.Tag.ToString(), out index))
+            {
+                MessageBox.Show("El valor del Tag no es un número válido.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             var escenario = Escenarios[index];
 
-            // Crear una instancia de la ventana AgregarEscenario sin información previa
-            var ventanaAgregarEscenario = new AgregarEscenario(escenario);
-            if (ventanaAgregarEscenario.ShowDialog() == true)
-            {
-                // EscenarioEditado (en ventanaAgregarEscenario) actualiza el objeto escenario
-                // Marcar TieneInformacion en true si se completó con éxito
-                escenario.TieneInformacion = true;
+            // Simular obtención de datos del usuario
+            // Por ejemplo, podrías abrir una ventana AgregarEscenario y obtener el nombre y el artista
+            // Aquí se utilizan valores de ejemplo:
+            string nuevoNombre = "Escenario X";
+            string nuevoArtista = "Artista Y";
 
-                // Guardar en el archivo
-                GuardarEscenariosEnArchivo();
+            // Asignar las propiedades del escenario y marcar que tiene información
+            escenario.TieneInformacion = true;
+            escenario.Nombre = nuevoNombre;
+            escenario.Artista = nuevoArtista;
 
-                MessageBox.Show("Información agregada correctamente al escenario.",
-                                "Agregar Información",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Information);
-            }
+            // Guardar cambios en el archivo, si corresponde
+            GuardarEscenariosEnArchivo();
+
+            MessageBox.Show("Información agregada correctamente al escenario.",
+                            "Agregar Información",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Information);
         }
+
 
         // Este método es un ejemplo de cómo guardar los escenarios en un archivo de texto
         // Ajusta la lógica según necesites (nombre del archivo, formato, etc.)

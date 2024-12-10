@@ -82,7 +82,7 @@
                         Background="{Binding Escenarios[0].TieneInformacion, Converter={StaticResource BoolToColorConverter}}"
                         Foreground="White" FontWeight="Bold" Grid.Row="0" Grid.Column="0">
 					<Grid>
-						<!-- Panel con información -->
+						<!-- Panel con información (solo Nombre y Artista) -->
 						<StackPanel>
 							<StackPanel.Style>
 								<Style TargetType="StackPanel">
@@ -97,8 +97,6 @@
 
 							<TextBlock Text="{Binding Escenarios[0].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
 							<TextBlock Text="{Binding Escenarios[0].Artista}" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[0].Fecha}" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[0].AforoMax, StringFormat='Aforo Max: {0}'}" HorizontalAlignment="Center" />
 							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 								<Button Content="ℹ" ToolTip="Información" Width="30" Margin="5"
                                         Tag="0"
@@ -139,7 +137,7 @@
                         Background="{Binding Escenarios[1].TieneInformacion, Converter={StaticResource BoolToColorConverter}}"
                         Foreground="White" FontWeight="Bold" Grid.Row="0" Grid.Column="2">
 					<Grid>
-						<!-- Panel con información -->
+						<!-- Panel con información (solo Nombre y Artista) -->
 						<StackPanel>
 							<StackPanel.Style>
 								<Style TargetType="StackPanel">
@@ -154,8 +152,6 @@
 
 							<TextBlock Text="{Binding Escenarios[1].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
 							<TextBlock Text="{Binding Escenarios[1].Artista}" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[1].Fecha}" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[1].AforoMax, StringFormat='Aforo Max: {0}'}" HorizontalAlignment="Center" />
 							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 								<Button Content="ℹ" ToolTip="Información" Width="30" Margin="5"
                                         Tag="1"
@@ -191,12 +187,12 @@
 					</Grid>
 				</Button>
 
-				<!-- Escenario Principal (2) -->
+				<!-- Escenario 2 (Principal) -->
 				<Button Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"
                         Background="{Binding Escenarios[2].TieneInformacion, Converter={StaticResource BoolToColorConverter}}"
                         Foreground="White" FontWeight="Bold" FontSize="16" Grid.Row="1" Grid.Column="1">
 					<Grid>
-						<!-- Panel con información -->
+						<!-- Panel con información (solo Nombre y Artista) -->
 						<StackPanel>
 							<StackPanel.Style>
 								<Style TargetType="StackPanel">
@@ -211,8 +207,6 @@
 
 							<TextBlock Text="{Binding Escenarios[2].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
 							<TextBlock Text="{Binding Escenarios[2].Artista}" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[2].Fecha}" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[2].AforoMax, StringFormat='Aforo Max: {0}'}" HorizontalAlignment="Center" />
 							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 								<Button Content="ℹ" ToolTip="Información" Width="30" Margin="5"
                                         Tag="2"
@@ -253,7 +247,7 @@
                         Background="{Binding Escenarios[3].TieneInformacion, Converter={StaticResource BoolToColorConverter}}"
                         Foreground="White" FontWeight="Bold" Grid.Row="2" Grid.Column="0">
 					<Grid>
-						<!-- Panel con información -->
+						<!-- Panel con información (solo Nombre y Artista) -->
 						<StackPanel>
 							<StackPanel.Style>
 								<Style TargetType="StackPanel">
@@ -268,8 +262,6 @@
 
 							<TextBlock Text="{Binding Escenarios[3].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
 							<TextBlock Text="{Binding Escenarios[3].Artista}" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[3].Fecha}" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[3].AforoMax, StringFormat='Aforo Max: {0}'}" HorizontalAlignment="Center" />
 							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 								<Button Content="ℹ" ToolTip="Información" Width="30" Margin="5"
                                         Tag="3"
@@ -310,7 +302,7 @@
                         Background="{Binding Escenarios[4].TieneInformacion, Converter={StaticResource BoolToColorConverter}}"
                         Foreground="White" FontWeight="Bold" Grid.Row="2" Grid.Column="2">
 					<Grid>
-						<!-- Panel con información -->
+						<!-- Panel con información (solo Nombre y Artista) -->
 						<StackPanel>
 							<StackPanel.Style>
 								<Style TargetType="StackPanel">
@@ -325,8 +317,6 @@
 
 							<TextBlock Text="{Binding Escenarios[4].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
 							<TextBlock Text="{Binding Escenarios[4].Artista}" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[4].Fecha}" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[4].AforoMax, StringFormat='Aforo Max: {0}'}" HorizontalAlignment="Center" />
 							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 								<Button Content="ℹ" ToolTip="Información" Width="30" Margin="5"
                                         Tag="4"
@@ -365,7 +355,7 @@
 		</GroupBox>
 
 		<!-- Panel Derecho: Artistas -->
-		<GroupBox Header="Artistas" Grid.Row="0" Grid.Column="1" Margin="10,10,10,414" Background="#FFFFFF" Grid.RowSpan="2">
+		<GroupBox Header="Artistas" Grid.Row="0" Grid.Column="1" Margin="10" Background="#FFFFFF" VerticalAlignment="Stretch">
 			<Grid Margin="10">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto" />
@@ -381,7 +371,7 @@
 					<Button Content="➕   AÑADIR ARTISTA" Click="BtnAgregarArtista_Click" Height="30" Width="150" />
 				</StackPanel>
 
-				<!-- Tabla -->
+				<!-- Tabla Artistas -->
 				<DataGrid x:Name="dgArtistas" Grid.Row="1" AutoGenerateColumns="False" Margin="10" IsReadOnly="True" CanUserAddRows="False"
                           CanUserResizeColumns="False" RowHeight="60">
 					<DataGrid.ColumnHeaderStyle>
@@ -446,3 +436,4 @@
                 Margin="0,10,0,10" Width="216" Height="80" Click="BtnGuardar_Click" Grid.Row="1" />
 	</Grid>
 </Window>
+
