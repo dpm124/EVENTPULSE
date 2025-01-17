@@ -23,12 +23,19 @@ namespace EVENTPULSE
         // Manejador del botón Ayuda
         private void OnAyudaClick(object sender, RoutedEventArgs e)
         {
-            // Crear una nueva instancia de la ventana Ayuda
+            // 1) Oculto FestivalesWindow antes de mostrar la Ayuda
+            this.Hide();
+
             var ventanaAyuda = new Ayuda();
 
-            // Mostrar la ventana Ayuda
-            ventanaAyuda.ShowDialog(); // Usamos ShowDialog para que sea modal
+            // 2) Al hacer ShowDialog, se bloquea esta ventana 
+            //    hasta que la de Ayuda se cierre
+            ventanaAyuda.ShowDialog();
+
+            // 3) Cuando se cierra Ayuda, volvemos a mostrar FestivalesWindow
+            this.Show();
         }
+
 
 
         // Manejador del botón Salir
