@@ -22,47 +22,37 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Nombre -->
+        <!-- Campos del formulario -->
         <Label Content="Nombre:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" />
         <TextBox x:Name="txtNombre" Grid.Row="0" Grid.Column="1" Width="200" Margin="5" />
 
-        <!-- Apellido -->
         <Label Content="Apellido:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" />
         <TextBox x:Name="txtApellido" Grid.Row="1" Grid.Column="1" Width="200" Margin="5" />
 
-        <!-- Edad -->
         <Label Content="Edad:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" />
         <TextBox x:Name="txtEdad" Grid.Row="2" Grid.Column="1" Width="200" Margin="5" />
 
-        <!-- Género -->
         <Label Content="Género:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" />
         <TextBox x:Name="txtGenero" Grid.Row="3" Grid.Column="1" Width="200" Margin="5" />
 
-        <!-- Descripción -->
         <Label Content="Descripción:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" />
         <TextBox x:Name="txtDescripcion" Grid.Row="4" Grid.Column="1" Width="200" Margin="5" />
 
-        <!-- Géneros Musicales -->
         <Label Content="Géneros Musicales:" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" />
         <TextBox x:Name="txtGenerosMusicales" Grid.Row="5" Grid.Column="1" Width="200" Margin="5" />
 
-        <!-- Sitio Web -->
         <Label Content="Sitio Web:" Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" />
         <TextBox x:Name="txtSitioWeb" Grid.Row="6" Grid.Column="1" Width="200" Margin="5" />
 
-        <!-- Fecha de Actuación -->
         <Label Content="Fecha Actuación:" Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" />
         <DatePicker x:Name="dpActuacionFecha" Grid.Row="7" Grid.Column="1" Width="200" Margin="5" />
 
-        <!-- Hora de Actuación -->
         <Label Content="Hora Actuación:" Grid.Row="8" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" />
         <TextBox x:Name="txtActuacionHora" Grid.Row="8" Grid.Column="1" Width="200" Margin="5" />
 
-        <!-- Lugar -->
         <Label Content="Lugar:" Grid.Row="9" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5" />
         <TextBox x:Name="txtLugar" Grid.Row="9" Grid.Column="1" Width="200" Margin="5" />
 
-        <!-- Estado -->
         <Label Content="Estado:" Grid.Row="10" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,4,0" />
         <ComboBox x:Name="cmbEstado" Grid.Row="10" Grid.Column="1" Width="200" Margin="30,5,29,75">
             <ComboBoxItem Content="En espera" IsSelected="True" />
@@ -72,8 +62,10 @@
 
         <!-- Botones -->
         <StackPanel Grid.Row="11" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="100,31,0,-21">
-            <Button Content="Guardar" Width="80" Margin="5" Click="BtnGuardar_Click" Height="21" />
-            <Button Content="Cancelar" Width="80" Margin="5" Click="BtnCancelar_Click" Height="21" />
+            <Button Content="Guardar" Width="80" Margin="5" Click="BtnGuardar_Click" Height="30" 
+                    Background="Black" Foreground="White" FontWeight="Bold" />
+            <Button Content="Cancelar" Width="80" Margin="5" Click="BtnCancelar_Click" Height="30" 
+                    Background="Gray" Foreground="White" FontWeight="Bold" />
         </StackPanel>
     </Grid>
 </Window>

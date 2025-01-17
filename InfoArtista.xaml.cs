@@ -17,23 +17,6 @@ namespace EVENTPULSE
             SetEstadoInicial(artista.Estado);
         }
 
-        private void AbrirVentanaFestivales()
-        {
-            FestivalesWindow festivalesWindow = new FestivalesWindow();
-
-            // 1) Al cerrarse la ventana de Festivales, volvemos a mostrar la principal.
-            festivalesWindow.Closed += (s, e) =>
-            {
-                this.Show();
-            };
-
-            // 2) Ocultamos la ventana actual (MainWindow) en vez de cerrarla
-            this.Hide();
-
-            // 3) Mostramos la ventana de Festivales
-            festivalesWindow.Show();
-        }
-
         // Método para establecer el estado inicial en el ComboBox
         private void SetEstadoInicial(string estado)
         {
