@@ -23,8 +23,13 @@ namespace EVENTPULSE
         // Manejador del botón Ayuda
         private void OnAyudaClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Esta es la sección de ayuda.", "Ayuda", MessageBoxButton.OK, MessageBoxImage.Information);
+            // Crear una nueva instancia de la ventana Ayuda
+            var ventanaAyuda = new Ayuda();
+
+            // Mostrar la ventana Ayuda
+            ventanaAyuda.ShowDialog(); // Usamos ShowDialog para que sea modal
         }
+
 
         // Manejador del botón Salir
         private void OnSalirClick(object sender, RoutedEventArgs e)

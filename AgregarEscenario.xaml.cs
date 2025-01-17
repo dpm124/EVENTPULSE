@@ -9,15 +9,15 @@ namespace EVENTPULSE
         public AgregarEscenario()
         {
             InitializeComponent();
-            EscenarioEditado = new EscenarioModel(); // Crear un nuevo objeto
+            EscenarioEditado = new EscenarioModel(); // Crear un nuevo escenario vacío
         }
 
         public AgregarEscenario(EscenarioModel escenarioExistente)
         {
             InitializeComponent();
-            EscenarioEditado = escenarioExistente; // Referencia al objeto existente
+            EscenarioEditado = escenarioExistente; // Referencia al escenario existente
 
-            // Cargar los valores existentes en los controles
+            // Cargar los valores en los controles
             txtNombre.Text = escenarioExistente.Nombre;
             txtAforo.Text = escenarioExistente.Aforo.ToString();
             txtNumeroSalidas.Text = escenarioExistente.NumeroSalidas.ToString();
@@ -38,7 +38,7 @@ namespace EVENTPULSE
                 return;
             }
 
-            // Asignar los valores al escenario
+            // Asignar los valores al modelo
             EscenarioEditado.Nombre = txtNombre.Text;
             EscenarioEditado.Aforo = int.Parse(txtAforo.Text);
             EscenarioEditado.NumeroSalidas = int.Parse(txtNumeroSalidas.Text);

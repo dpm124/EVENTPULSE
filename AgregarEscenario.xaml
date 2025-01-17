@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Agregar/Editar Escenario"
-        Height="350" Width="450" WindowStartupLocation="CenterScreen">
+        Height="300" Width="400" WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -15,43 +15,33 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!-- Nombre -->
+        <!-- Nombre del Escenario -->
         <Label Grid.Row="0" Grid.Column="0" Content="Nombre:" VerticalAlignment="Center" Margin="5"/>
-        <TextBox x:Name="txtNombre" Grid.Row="0" Grid.Column="1" Margin="5" Width="200"
-                 Text="{Binding Nombre, UpdateSourceTrigger=PropertyChanged}" />
-
-        <!-- Artista -->
-        <Label Grid.Row="1" Grid.Column="0" Content="Artista:" VerticalAlignment="Center" Margin="5"/>
-        <TextBox x:Name="txtArtista" Grid.Row="1" Grid.Column="1" Margin="5" Width="200"
-                 Text="{Binding Artista, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox x:Name="txtNombre" Grid.Row="0" Grid.Column="1" Margin="5" Width="200" />
 
         <!-- Aforo -->
-        <Label Grid.Row="2" Grid.Column="0" Content="Aforo:" VerticalAlignment="Center" Margin="5"/>
-        <TextBox x:Name="txtAforo" Grid.Row="2" Grid.Column="1" Margin="5" Width="200"
-                 Text="{Binding Aforo, UpdateSourceTrigger=PropertyChanged}" />
+        <Label Grid.Row="1" Grid.Column="0" Content="Aforo:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="txtAforo" Grid.Row="1" Grid.Column="1" Margin="5" Width="200" />
 
         <!-- N° Salidas -->
-        <Label Grid.Row="3" Grid.Column="0" Content="N° Salidas:" VerticalAlignment="Center" Margin="5"/>
-        <TextBox x:Name="txtNumeroSalidas" Grid.Row="3" Grid.Column="1" Margin="5" Width="200"
-                 Text="{Binding NumeroSalidas, UpdateSourceTrigger=PropertyChanged}" />
+        <Label Grid.Row="2" Grid.Column="0" Content="N° Salidas:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="txtNumeroSalidas" Grid.Row="2" Grid.Column="1" Margin="5" Width="200" />
 
         <!-- N° Asesos -->
-        <Label Grid.Row="4" Grid.Column="0" Content="N° Asesos:" VerticalAlignment="Center" Margin="5"/>
-        <TextBox x:Name="txtNumeroAsesos" Grid.Row="4" Grid.Column="1" Margin="5" Width="200"
-                 Text="{Binding NumeroAsesos, UpdateSourceTrigger=PropertyChanged}" />
+        <Label Grid.Row="3" Grid.Column="0" Content="N° Asesos:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="txtNumeroAsesos" Grid.Row="3" Grid.Column="1" Margin="5" Width="200" />
 
         <!-- N° Servicios Médicos -->
-        <Label Grid.Row="5" Grid.Column="0" Content="N° Servicios Médicos:" VerticalAlignment="Center" Margin="5"/>
-        <TextBox x:Name="txtNumeroServiciosMedicos" Grid.Row="5" Grid.Column="1" Margin="5" Width="200"
-                 Text="{Binding NumeroServiciosMedicos, UpdateSourceTrigger=PropertyChanged}" />
+        <Label Grid.Row="4" Grid.Column="0" Content="N° Servicios Médicos:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="txtNumeroServiciosMedicos" Grid.Row="4" Grid.Column="1" Margin="5" Width="200" />
 
         <!-- Botones -->
-        <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
             <Button Content="Guardar" Width="100" Margin="5" Click="BtnGuardar_Click" />
             <Button Content="Cancelar" Width="100" Margin="5" Click="BtnCancelar_Click" />
         </StackPanel>
     </Grid>
 </Window>
+

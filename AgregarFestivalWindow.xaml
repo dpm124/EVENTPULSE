@@ -2,438 +2,212 @@
     x:Class="EVENTPULSE.AgregarFestivalWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:EVENTPULSE"
-    xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="av"
     Title="Añadir Festival"
     WindowStartupLocation="CenterScreen"
     ResizeMode="CanResizeWithGrip"
     MaxWidth="1920" MaxHeight="1080"
     Background="#A0C4D9">
 
-	<Window.Resources>
-		<local:BoolToColorConverter x:Key="BoolToColorConverter"/>
-		<local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-	</Window.Resources>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-	<Grid Margin="10">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="2*" />
-			<ColumnDefinition Width="3*" />
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
+        <!-- Panel Izquierdo Superior: Detalles del Festival -->
+        <GroupBox Header="Detalles del Festival" FontSize="16" FontWeight="Bold" 
+                  Grid.Row="0" Grid.Column="0" Margin="10" Background="#FFFFFF" Padding="10">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
 
-		<!-- Panel Izquierdo Superior: Detalles del Festival -->
-		<GroupBox Header="Detalles del Festival" Grid.Row="0" Grid.Column="0" Margin="10" Background="#FFFFFF">
-			<Grid Margin="10">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" MinHeight="85" />
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="2*" />
-					<ColumnDefinition Width="3*" />
-				</Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Content="Nombre:" VerticalAlignment="Center" Margin="5" FontWeight="SemiBold" />
+                <TextBox x:Name="txtNombreFestival" Grid.Row="0" Grid.Column="1" Margin="5" Padding="8" FontSize="14" />
 
-				<Label Grid.Row="0" Content="Nombre:" VerticalAlignment="Top" Margin="10" />
-				<TextBox x:Name="txtNombreFestival" Grid.Row="0" Grid.Column="1" Margin="5" />
+                <Label Grid.Row="1" Content="Abono general:" VerticalAlignment="Center" Margin="5" FontWeight="SemiBold" />
+                <TextBox x:Name="txtAbonoGeneral" Grid.Row="1" Grid.Column="1" Margin="5" Padding="8" FontSize="14" />
 
-				<Label Grid.Row="1" Content="Abono general:" VerticalAlignment="Top" Margin="10" />
-				<TextBox x:Name="txtAbonoGeneral" Grid.Row="1" Grid.Column="1" Margin="5" />
+                <Label Grid.Row="2" Content="Abono VIP:" VerticalAlignment="Center" Margin="5" FontWeight="SemiBold" />
+                <TextBox x:Name="txtAbonoVIP" Grid.Row="2" Grid.Column="1" Margin="5" Padding="8" FontSize="14" />
 
-				<Label Grid.Row="2" Content="Abono VIP:" VerticalAlignment="Top" Margin="10" />
-				<TextBox x:Name="txtAbonoVIP" Grid.Row="2" Grid.Column="1" Margin="5" />
+                <Label Grid.Row="3" Content="Ubicación:" VerticalAlignment="Center" Margin="5" FontWeight="SemiBold" />
+                <TextBox x:Name="txtUbicacionFestival" Grid.Row="3" Grid.Column="1" Margin="5" Padding="8" FontSize="14" />
 
-				<Label Grid.Row="3" Content="Ubicación:" VerticalAlignment="Top" Margin="10" />
-				<TextBox x:Name="txtUbicacionFestival" Grid.Row="3" Grid.Column="1" Margin="5" />
+                <Label Grid.Row="4" Content="Fecha:" VerticalAlignment="Center" Margin="5" FontWeight="SemiBold" />
+                <DatePicker x:Name="dpFechaFestival" Grid.Row="4" Grid.Column="1" Margin="5" Padding="5" FontSize="14" />
 
-				<Label Grid.Row="4" Content="Fecha:" VerticalAlignment="Top" Margin="10" />
-				<DatePicker x:Name="dpFechaFestival" Grid.Row="4" Grid.Column="1" Margin="5" />
+                <Label Grid.Row="5" Content="Descripción:" VerticalAlignment="Top" Margin="5" FontWeight="SemiBold" />
+                <TextBox x:Name="txtDescripcionFestival" Grid.Row="5" Grid.Column="1" Margin="5" Padding="8" FontSize="14" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Height="80" />
+            </Grid>
+        </GroupBox>
 
-				<Label Grid.Row="5" Content="Descripción:" VerticalAlignment="Top" Margin="10" />
-				<TextBox x:Name="txtDescripcionFestival" Grid.Row="5" Grid.Column="1" Margin="5" />
-			</Grid>
-		</GroupBox>
 
-		<!-- Panel Izquierdo Inferior: Escenarios -->
-		<GroupBox Header="Escenarios" Grid.Column="0" Grid.Row="1" Margin="10" Background="#FFFFFF">
-			<Grid Margin="10">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="*" />
-					<RowDefinition Height="*" />
-					<RowDefinition Height="*" />
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="*" />
-				</Grid.ColumnDefinitions>
+        <!-- Panel Izquierdo Inferior: Escenarios -->
+        <GroupBox Header="Escenarios" FontSize="16" FontWeight="Bold" 
+          Grid.Column="0" Grid.Row="1" Margin="10" Background="#FFFFFF" Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-				<!-- Escenario 0 -->
-				<Button Width="160" Height="160" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"
-                        Background="{Binding Escenarios[0].TieneInformacion, Converter={StaticResource BoolToColorConverter}}"
-                        Foreground="White" FontWeight="Bold" Grid.Row="0" Grid.Column="0">
-					<Grid>
-						<!-- Panel con información (solo Nombre y Artista) -->
-						<StackPanel>
-							<StackPanel.Style>
-								<Style TargetType="StackPanel">
-									<Setter Property="Visibility" Value="Collapsed"/>
-									<Style.Triggers>
-										<DataTrigger Binding="{Binding Escenarios[0].TieneInformacion}" Value="True">
-											<Setter Property="Visibility" Value="Visible"/>
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</StackPanel.Style>
+                <!-- Escenario 0 -->
+                <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Row="0" Grid.Column="0">
+                    <Grid Tag="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Escenario Principal" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,10" />
+                        <TextBlock Grid.Row="1" Text="{Binding Escenarios[0].Artista, FallbackValue='Sin Artista'}" FontSize="14" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="2" Text="{Binding Escenarios[0].Fecha, FallbackValue='Sin Fecha'}" FontSize="14" HorizontalAlignment="Center" Margin="0,5,0,10" />
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                            <Button Content="ℹ Info" ToolTip="Información" MinWidth="60" MinHeight="30" Margin="5"
+                            Tag="0" Click="BtnInformacionEscenario_Click" />
+                            <Button Content="✏️ Editar" ToolTip="Editar" MinWidth="60" MinHeight="30" Margin="5"
+                            Tag="0" Click="BtnEditarEscenario_Click" />
+                            <Button Content="❌ Eliminar" ToolTip="Eliminar" MinWidth="60" MinHeight="30" Margin="5"
+                            Tag="0" Click="BtnEliminarEscenario_Click" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
 
-							<TextBlock Text="{Binding Escenarios[0].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[0].Artista}" HorizontalAlignment="Center" />
-							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-								<Button Content="ℹ" ToolTip="Información" Width="30" Margin="5"
-                                        Tag="0"
-                                        Click="BtnInformacionEscenario_Click"/>
-								<Button Content="✏️" ToolTip="Editar" Width="30" Margin="5"
-                                        Tag="0"
-                                        Click="BtnEditarEscenario_Click"/>
-								<Button Content="❌" ToolTip="Eliminar" Width="30" Margin="5"
-                                        Tag="0"
-                                        Click="BtnEliminarEscenario_Click"/>
-							</StackPanel>
-						</StackPanel>
+                <!-- Escenario 1 -->
+                <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Row="0" Grid.Column="1">
+                    <Grid Tag="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Escenario 1" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,10" />
+                        <TextBlock Grid.Row="1" Text="{Binding Escenarios[1].Artista, FallbackValue='Sin Artista'}" FontSize="14" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="2" Text="{Binding Escenarios[1].Fecha, FallbackValue='Sin Fecha'}" FontSize="14" HorizontalAlignment="Center" Margin="0,5,0,10" />
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                            <Button Content="ℹ Info" ToolTip="Información" MinWidth="60" MinHeight="30" Margin="5"
+                            Tag="1" Click="BtnInformacionEscenario_Click" />
+                            <Button Content="✏️ Editar" ToolTip="Editar" MinWidth="60" MinHeight="30" Margin="5"
+                            Tag="1" Click="BtnEditarEscenario_Click" />
+                            <Button Content="❌ Eliminar" ToolTip="Eliminar" MinWidth="60" MinHeight="30" Margin="5"
+                            Tag="1" Click="BtnEliminarEscenario_Click" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
 
-						<!-- Panel sin información -->
-						<StackPanel>
-							<StackPanel.Style>
-								<Style TargetType="StackPanel">
-									<Setter Property="Visibility" Value="Collapsed"/>
-									<Style.Triggers>
-										<DataTrigger Binding="{Binding Escenarios[0].TieneInformacion}" Value="False">
-											<Setter Property="Visibility" Value="Visible"/>
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</StackPanel.Style>
+                <!-- Escenario 2 -->
+                <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Row="1" Grid.Column="0">
+                    <Grid Tag="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Escenario 2" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,10" />
+                        <TextBlock Grid.Row="1" Text="{Binding Escenarios[2].Artista, FallbackValue='Sin Artista'}" FontSize="14" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="2" Text="{Binding Escenarios[2].Fecha, FallbackValue='Sin Fecha'}" FontSize="14" HorizontalAlignment="Center" Margin="0,5,0,10" />
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                            <Button Content="ℹ Info" ToolTip="Información" MinWidth="60" MinHeight="30" Margin="5"
+                            Tag="2" Click="BtnInformacionEscenario_Click" />
+                            <Button Content="✏️ Editar" ToolTip="Editar" MinWidth="60" MinHeight="30" Margin="5"
+                            Tag="2" Click="BtnEditarEscenario_Click" />
+                            <Button Content="❌ Eliminar" ToolTip="Eliminar" MinWidth="60" MinHeight="30" Margin="5"
+                            Tag="2" Click="BtnEliminarEscenario_Click" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
 
-							<TextBlock Text="{Binding Escenarios[0].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
-							<TextBlock Text="No añadido a este festival" FontStyle="Italic" HorizontalAlignment="Center"/>
-							<Button Content="+" ToolTip="Agregar información" Width="30" Margin="5"
-                                    Tag="0"
-                                    Click="BtnAgregarInformacionEscenario_Click"/>
-						</StackPanel>
-					</Grid>
-				</Button>
+                <!-- Escenario 3 -->
+                <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Row="1" Grid.Column="1">
+                    <Grid Tag="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Escenario 3" FontSize="16" FontWeight="Bold" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,10" />
+                        <TextBlock Grid.Row="1" Text="{Binding Escenarios[3].Artista, FallbackValue='Sin Artista'}" FontSize="14" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="2" Text="{Binding Escenarios[3].Fecha, FallbackValue='Sin Fecha'}" FontSize="14" HorizontalAlignment="Center" Margin="0,5,0,10" />
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                            <Button Content="ℹ Info" ToolTip="Información" MinWidth="60" MinHeight="30" Margin="5"
+                            Tag="3" Click="BtnInformacionEscenario_Click" />
+                            <Button Content="✏️ Editar" ToolTip="Editar" MinWidth="60" MinHeight="30" Margin="5"
+                            Tag="3" Click="BtnEditarEscenario_Click" />
+                            <Button Content="❌ Eliminar" ToolTip="Eliminar" MinWidth="60" MinHeight="30" Margin="5"
+                            Tag="3" Click="BtnEliminarEscenario_Click" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </GroupBox>
 
-				<!-- Escenario 1 -->
-				<Button Width="160" Height="160" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"
-                        Background="{Binding Escenarios[1].TieneInformacion, Converter={StaticResource BoolToColorConverter}}"
-                        Foreground="White" FontWeight="Bold" Grid.Row="0" Grid.Column="2">
-					<Grid>
-						<!-- Panel con información (solo Nombre y Artista) -->
-						<StackPanel>
-							<StackPanel.Style>
-								<Style TargetType="StackPanel">
-									<Setter Property="Visibility" Value="Collapsed"/>
-									<Style.Triggers>
-										<DataTrigger Binding="{Binding Escenarios[1].TieneInformacion}" Value="True">
-											<Setter Property="Visibility" Value="Visible"/>
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</StackPanel.Style>
 
-							<TextBlock Text="{Binding Escenarios[1].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[1].Artista}" HorizontalAlignment="Center" />
-							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-								<Button Content="ℹ" ToolTip="Información" Width="30" Margin="5"
-                                        Tag="1"
-                                        Click="BtnInformacionEscenario_Click"/>
-								<Button Content="✏️" ToolTip="Editar" Width="30" Margin="5"
-                                        Tag="1"
-                                        Click="BtnEditarEscenario_Click"/>
-								<Button Content="❌" ToolTip="Eliminar" Width="30" Margin="5"
-                                        Tag="1"
-                                        Click="BtnEliminarEscenario_Click"/>
-							</StackPanel>
-						</StackPanel>
 
-						<!-- Panel sin información -->
-						<StackPanel>
-							<StackPanel.Style>
-								<Style TargetType="StackPanel">
-									<Setter Property="Visibility" Value="Collapsed"/>
-									<Style.Triggers>
-										<DataTrigger Binding="{Binding Escenarios[1].TieneInformacion}" Value="False">
-											<Setter Property="Visibility" Value="Visible"/>
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</StackPanel.Style>
 
-							<TextBlock Text="{Binding Escenarios[1].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
-							<TextBlock Text="No añadido a este festival" FontStyle="Italic" HorizontalAlignment="Center"/>
-							<Button Content="+" ToolTip="Agregar información" Width="30" Margin="5"
-                                    Tag="1"
-                                    Click="BtnAgregarInformacionEscenario_Click"/>
-						</StackPanel>
-					</Grid>
-				</Button>
 
-				<!-- Escenario 2 (Principal) -->
-				<Button Width="200" Height="200" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"
-                        Background="{Binding Escenarios[2].TieneInformacion, Converter={StaticResource BoolToColorConverter}}"
-                        Foreground="White" FontWeight="Bold" FontSize="16" Grid.Row="1" Grid.Column="1">
-					<Grid>
-						<!-- Panel con información (solo Nombre y Artista) -->
-						<StackPanel>
-							<StackPanel.Style>
-								<Style TargetType="StackPanel">
-									<Setter Property="Visibility" Value="Collapsed"/>
-									<Style.Triggers>
-										<DataTrigger Binding="{Binding Escenarios[2].TieneInformacion}" Value="True">
-											<Setter Property="Visibility" Value="Visible"/>
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</StackPanel.Style>
+        <!-- Panel Derecho: Artistas -->
+        <GroupBox Header="Artistas" FontSize="16" FontWeight="Bold" 
+                  Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Margin="10" Background="#FFFFFF" Padding="10">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-							<TextBlock Text="{Binding Escenarios[2].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[2].Artista}" HorizontalAlignment="Center" />
-							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-								<Button Content="ℹ" ToolTip="Información" Width="30" Margin="5"
-                                        Tag="2"
-                                        Click="BtnInformacionEscenario_Click"/>
-								<Button Content="✏️" ToolTip="Editar" Width="30" Margin="5"
-                                        Tag="2"
-                                        Click="BtnEditarEscenario_Click"/>
-								<Button Content="❌" ToolTip="Eliminar" Width="30" Margin="5"
-                                        Tag="2"
-                                        Click="BtnEliminarEscenario_Click"/>
-							</StackPanel>
-						</StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBox x:Name="txtBuscarArtista" Width="150" Margin="5" Padding="5" FontSize="14"
+                             Text="Buscar Artista" Foreground="Gray"
+                             GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus" />
+                    <Button Content="Filtrar" Width="75" Margin="5" Background="#5BC0DE" Foreground="White" FontSize="14" Click="BtnFiltrarArtistas_Click" />
+                    <Button Content="Reiniciar" Width="75" Margin="5" Background="#FF6961" Foreground="White" FontSize="14" Click="BtnReiniciarFiltroArtistas_Click" />
+                    <Button Content="Añadir Artista" Width="150" Margin="5" Background="#5CB85C" Foreground="White" FontSize="14" Click="BtnAgregarArtista_Click" />
+                </StackPanel>
 
-						<!-- Panel sin información -->
-						<StackPanel>
-							<StackPanel.Style>
-								<Style TargetType="StackPanel">
-									<Setter Property="Visibility" Value="Collapsed"/>
-									<Style.Triggers>
-										<DataTrigger Binding="{Binding Escenarios[2].TieneInformacion}" Value="False">
-											<Setter Property="Visibility" Value="Visible"/>
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</StackPanel.Style>
+                <DataGrid x:Name="dgArtistas" Grid.Row="1" AutoGenerateColumns="False" Margin="5" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*" />
+                        <DataGridTextColumn Header="Género" Binding="{Binding Genero}" Width="*" />
+                        <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="*" />
+                        <DataGridTemplateColumn Header="Opciones">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button Content="✏️ Editar" Width="80" Margin="2" Click="BtnEditarArtista_Click" />
+                                        <Button Content="❌ Eliminar" Width="80" Margin="2" Click="BtnEliminar_Click" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </GroupBox>
 
-							<TextBlock Text="{Binding Escenarios[2].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
-							<TextBlock Text="No añadido a este festival" FontStyle="Italic" HorizontalAlignment="Center"/>
-							<Button Content="+" ToolTip="Agregar información" Width="30" Margin="5"
-                                    Tag="2"
-                                    Click="BtnAgregarInformacionEscenario_Click"/>
-						</StackPanel>
-					</Grid>
-				</Button>
-
-				<!-- Escenario 3 -->
-				<Button Width="160" Height="160" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"
-                        Background="{Binding Escenarios[3].TieneInformacion, Converter={StaticResource BoolToColorConverter}}"
-                        Foreground="White" FontWeight="Bold" Grid.Row="2" Grid.Column="0">
-					<Grid>
-						<!-- Panel con información (solo Nombre y Artista) -->
-						<StackPanel>
-							<StackPanel.Style>
-								<Style TargetType="StackPanel">
-									<Setter Property="Visibility" Value="Collapsed"/>
-									<Style.Triggers>
-										<DataTrigger Binding="{Binding Escenarios[3].TieneInformacion}" Value="True">
-											<Setter Property="Visibility" Value="Visible"/>
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</StackPanel.Style>
-
-							<TextBlock Text="{Binding Escenarios[3].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[3].Artista}" HorizontalAlignment="Center" />
-							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-								<Button Content="ℹ" ToolTip="Información" Width="30" Margin="5"
-                                        Tag="3"
-                                        Click="BtnInformacionEscenario_Click"/>
-								<Button Content="✏️" ToolTip="Editar" Width="30" Margin="5"
-                                        Tag="3"
-                                        Click="BtnEditarEscenario_Click"/>
-								<Button Content="❌" ToolTip="Eliminar" Width="30" Margin="5"
-                                        Tag="3"
-                                        Click="BtnEliminarEscenario_Click"/>
-							</StackPanel>
-						</StackPanel>
-
-						<!-- Panel sin información -->
-						<StackPanel>
-							<StackPanel.Style>
-								<Style TargetType="StackPanel">
-									<Setter Property="Visibility" Value="Collapsed"/>
-									<Style.Triggers>
-										<DataTrigger Binding="{Binding Escenarios[3].TieneInformacion}" Value="False">
-											<Setter Property="Visibility" Value="Visible"/>
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</StackPanel.Style>
-
-							<TextBlock Text="{Binding Escenarios[3].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
-							<TextBlock Text="No añadido a este festival" FontStyle="Italic" HorizontalAlignment="Center"/>
-							<Button Content="+" ToolTip="Agregar información" Width="30" Margin="5"
-                                    Tag="3"
-                                    Click="BtnAgregarInformacionEscenario_Click"/>
-						</StackPanel>
-					</Grid>
-				</Button>
-
-				<!-- Escenario 4 -->
-				<Button Width="160" Height="160" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"
-                        Background="{Binding Escenarios[4].TieneInformacion, Converter={StaticResource BoolToColorConverter}}"
-                        Foreground="White" FontWeight="Bold" Grid.Row="2" Grid.Column="2">
-					<Grid>
-						<!-- Panel con información (solo Nombre y Artista) -->
-						<StackPanel>
-							<StackPanel.Style>
-								<Style TargetType="StackPanel">
-									<Setter Property="Visibility" Value="Collapsed"/>
-									<Style.Triggers>
-										<DataTrigger Binding="{Binding Escenarios[4].TieneInformacion}" Value="True">
-											<Setter Property="Visibility" Value="Visible"/>
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</StackPanel.Style>
-
-							<TextBlock Text="{Binding Escenarios[4].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
-							<TextBlock Text="{Binding Escenarios[4].Artista}" HorizontalAlignment="Center" />
-							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-								<Button Content="ℹ" ToolTip="Información" Width="30" Margin="5"
-                                        Tag="4"
-                                        Click="BtnInformacionEscenario_Click"/>
-								<Button Content="✏️" ToolTip="Editar" Width="30" Margin="5"
-                                        Tag="4"
-                                        Click="BtnEditarEscenario_Click"/>
-								<Button Content="❌" ToolTip="Eliminar" Width="30" Margin="5"
-                                        Tag="4"
-                                        Click="BtnEliminarEscenario_Click"/>
-							</StackPanel>
-						</StackPanel>
-
-						<!-- Panel sin información -->
-						<StackPanel>
-							<StackPanel.Style>
-								<Style TargetType="StackPanel">
-									<Setter Property="Visibility" Value="Collapsed"/>
-									<Style.Triggers>
-										<DataTrigger Binding="{Binding Escenarios[4].TieneInformacion}" Value="False">
-											<Setter Property="Visibility" Value="Visible"/>
-										</DataTrigger>
-									</Style.Triggers>
-								</Style>
-							</StackPanel.Style>
-
-							<TextBlock Text="{Binding Escenarios[4].Nombre}" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" />
-							<TextBlock Text="No añadido a este festival" FontStyle="Italic" HorizontalAlignment="Center"/>
-							<Button Content="+" ToolTip="Agregar información" Width="30" Margin="5"
-                                    Tag="4"
-                                    Click="BtnAgregarInformacionEscenario_Click"/>
-						</StackPanel>
-					</Grid>
-				</Button>
-			</Grid>
-		</GroupBox>
-
-		<!-- Panel Derecho: Artistas -->
-		<GroupBox Header="Artistas" Grid.Row="0" Grid.Column="1" Margin="10" Background="#FFFFFF" VerticalAlignment="Stretch">
-			<Grid Margin="10">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="*" />
-				</Grid.RowDefinitions>
-
-				<!-- Filtros -->
-				<StackPanel Orientation="Horizontal" Margin="10">
-					<Label Content="Buscar Artista:" VerticalAlignment="Center" />
-					<TextBox x:Name="txtBuscarArtista" Width="129" Margin="5" />
-					<Button Content="Filtrar" Width="48" Margin="5" Click="BtnFiltrarArtistas_Click" />
-					<Button Content="Reiniciar" Width="56" Margin="5" Click="BtnReiniciarFiltroArtistas_Click" />
-					<Button Content="➕   AÑADIR ARTISTA" Click="BtnAgregarArtista_Click" Height="30" Width="150" />
-				</StackPanel>
-
-				<!-- Tabla Artistas -->
-				<DataGrid x:Name="dgArtistas" Grid.Row="1" AutoGenerateColumns="False" Margin="10" IsReadOnly="True" CanUserAddRows="False"
-                          CanUserResizeColumns="False" RowHeight="60">
-					<DataGrid.ColumnHeaderStyle>
-						<Style TargetType="{x:Type DataGridColumnHeader}">
-							<Setter Property="HorizontalContentAlignment" Value="Center" />
-						</Style>
-					</DataGrid.ColumnHeaderStyle>
-					<DataGrid.Columns>
-						<DataGridTemplateColumn Header="Logo" Width="60">
-							<DataGridTemplateColumn.CellTemplate>
-								<DataTemplate>
-									<Image Source="{Binding Imagen}" Width="40" Height="40" Stretch="Uniform" />
-								</DataTemplate>
-							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn>
-
-						<DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="140" />
-						<DataGridTextColumn Header="Género del artista" Binding="{Binding Genero}" Width="140" />
-						<DataGridTextColumn Header="Géneros musicales" Binding="{Binding GenerosMusicales}" Width="250" />
-
-						<DataGridTemplateColumn Header="Estado" Width="100">
-							<DataGridTemplateColumn.CellTemplate>
-								<DataTemplate>
-									<TextBlock Text="{Binding Estado}" HorizontalAlignment="Center" VerticalAlignment="Center">
-										<TextBlock.Style>
-											<Style TargetType="{x:Type TextBlock}">
-												<Style.Triggers>
-													<DataTrigger Binding="{Binding Estado}" Value="Confirmado">
-														<Setter Property="Background" Value="LightGreen" />
-														<Setter Property="Foreground" Value="Green" />
-													</DataTrigger>
-													<DataTrigger Binding="{Binding Estado}" Value="Cancelado">
-														<Setter Property="Background" Value="LightCoral" />
-														<Setter Property="Foreground" Value="Red" />
-													</DataTrigger>
-												</Style.Triggers>
-											</Style>
-										</TextBlock.Style>
-									</TextBlock>
-								</DataTemplate>
-							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn>
-
-						<DataGridTemplateColumn Header="Opciones" Width="110">
-							<DataGridTemplateColumn.CellTemplate>
-								<DataTemplate>
-									<StackPanel Orientation="Horizontal">
-										<Button Content="ℹ" ToolTip="Información" Width="30" Click="BtnInformacionArtista_Click" />
-										<Button Content="✏️" ToolTip="Editar" Width="30" Click="BtnEditarArtista_Click" />
-										<Button Content="❌" ToolTip="Eliminar" Width="30" Click="BtnEliminar_Click" />
-									</StackPanel>
-								</DataTemplate>
-							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn>
-					</DataGrid.Columns>
-				</DataGrid>
-			</Grid>
-		</GroupBox>
-
-		<!-- Botón Guardar Festival -->
-		<Button Grid.Column="1" Content="GUARDAR FESTIVAL" HorizontalAlignment="Center" Background="Black" Foreground="White"
-                Margin="0,10,0,10" Width="216" Height="80" Click="BtnGuardar_Click" Grid.Row="1" />
-	</Grid>
+        <!-- Botón Guardar Festival -->
+        <Button Grid.Column="1" Content="Guardar Festival" HorizontalAlignment="Center" Background="#007ACC" Foreground="White"
+                FontSize="16" FontWeight="Bold" Width="200" Height="50" Margin="0,20,0,0" Grid.Row="1" Click="BtnGuardar_Click" />
+    </Grid>
 </Window>
-
