@@ -20,15 +20,31 @@ namespace EVENTPULSE
             dgFestivales.ItemsSource = Festivales;
         }
 
-        // Manejador del botón Ayuda
-        private void OnAyudaClick(object sender, RoutedEventArgs e)
+        // Manejador del botón Ayuda ANTIGUO 
+        /* private void OnAyudaClick(object sender, RoutedEventArgs e)
         {
             // Crear una nueva instancia de la ventana Ayuda
             var ventanaAyuda = new Ayuda();
 
             // Mostrar la ventana Ayuda
             ventanaAyuda.ShowDialog(); // Usamos ShowDialog para que sea modal
+        } */
+
+        private void OnAyudaClick(object sender, RoutedEventArgs e)
+        {
+            // 1) Oculto FestivalesWindow antes de mostrar la Ayuda
+            this.Hide();
+
+            var ventanaAyuda = new Ayuda();
+
+            // 2) Al hacer ShowDialog, se bloquea esta ventana 
+            //    hasta que la de Ayuda se cierre
+            ventanaAyuda.ShowDialog();
+
+            // 3) Cuando se cierra Ayuda, volvemos a mostrar FestivalesWindow
+            this.Show();
         }
+
 
 
         // Manejador del botón Salir
@@ -78,9 +94,23 @@ namespace EVENTPULSE
         // Manejador del botón Agregar Festival
         private void OnAgregarFestivalClick(object sender, RoutedEventArgs e)
         {
+            // 1) Ocultamos la ventana de Festivales
+            this.Hide();
+
+            // 2) Creamos la ventana de AgregarFestival
             var ventanaAgregar = new AgregarFestivalWindow();
 
-            if (ventanaAgregar.ShowDialog() == true)
+            // Forzamos a que se abra maximizada (pantalla completa dentro de la ventana)
+            ventanaAgregar.WindowState = WindowState.Maximized;
+
+            // 3) La abrimos como modal, bloqueando la ejecución hasta que se cierre
+            bool? resultado = ventanaAgregar.ShowDialog();
+
+            // 4) Al cerrarse, re-mostramos FestivalesWindow
+            this.Show();
+
+            // 5) Si el resultado fue true, significa que el usuario guardó datos
+            if (resultado == true)
             {
                 var nuevoFestival = new Festival
                 {
@@ -90,9 +120,13 @@ namespace EVENTPULSE
                     Estado = "Activo"
                 };
 
-                if (Festivales.Any(f => f.Nombre.Equals(nuevoFestival.Nombre, StringComparison.OrdinalIgnoreCase)))
+                if (Festivales.Any(f =>
+                    f.Nombre.Equals(nuevoFestival.Nombre, StringComparison.OrdinalIgnoreCase)))
                 {
-                    MessageBox.Show("Ya existe un festival con ese nombre.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Ya existe un festival con ese nombre.",
+                                    "Error",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Warning);
                     return;
                 }
 
@@ -100,6 +134,8 @@ namespace EVENTPULSE
                 festivalesOriginal.Add(nuevoFestival);
             }
         }
+
+
 
         // Manejador del botón Editar Festival
         private void OnEditarClick(object sender, RoutedEventArgs e)

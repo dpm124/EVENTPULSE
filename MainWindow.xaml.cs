@@ -151,8 +151,18 @@ namespace EVENTPULSE
         private void AbrirVentanaFestivales()
         {
             FestivalesWindow festivalesWindow = new FestivalesWindow();
+
+            // 1) Al cerrarse la ventana de Festivales, volvemos a mostrar la principal.
+            festivalesWindow.Closed += (s, e) =>
+            {
+                this.Show();
+            };
+
+            // 2) Ocultamos la ventana actual (MainWindow) en vez de cerrarla
+            this.Hide();
+
+            // 3) Mostramos la ventana de Festivales
             festivalesWindow.Show();
-            this.Close(); // Cerrar la ventana de login
         }
 
         private void BtnAñadirFestival_Click(object sender, RoutedEventArgs e)
