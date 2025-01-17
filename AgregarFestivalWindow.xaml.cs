@@ -277,7 +277,7 @@ namespace EVENTPULSE
                 string.IsNullOrWhiteSpace(txtUbicacionFestival.Text) ||
                 dpFechaFestival.SelectedDate == null)
             {
-                MessageBox.Show("Por favor, completa todos los campos obligatorios.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Por favor, completa todos los campos. En caso de no conocerlo, indíquelo o marque 0.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
