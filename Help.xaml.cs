@@ -1,45 +1,62 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace EVENTPULSE
 {
+    // Clase simple para guardar los datos de un autor
+    public class Autor
+    {
+        public string Email { get; set; }
+        public string Nick { get; set; }
+        public string Nombre { get; set; }
+
+        public Autor(string email, string nick, string nombre)
+        {
+            Email = email;
+            Nick = nick;
+            Nombre = nombre;
+        }
+    }
+
     public partial class Ayuda : Window
     {
         public Ayuda()
         {
             InitializeComponent();
-            CargarAutores();
+            // Cuando la ventana cargue, ejecutamos la carga manual
+            this.Loaded += Ayuda_Loaded;
         }
 
-        // Método para cargar los correos de los autores desde un archivo
-        private void CargarAutores()
+        private void Ayuda_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                // Ruta del archivo de correos
-                string filePath = @"C:\Users\Diego\source\repos\EVENTPULSE\Correos\correos.txt";
+            // Cargar autores de forma manual (no desde archivo)
+            CargarAutoresManualmente();
+        }
 
-                // Comprobar si el archivo existe
-                if (File.Exists(filePath))
-                {
-                    // Leer el contenido del archivo
-                    string[] autores = File.ReadAllLines(filePath);
-                    string autoresTexto = string.Join(Environment.NewLine, autores);
-
-                    // Mostrar los autores en el TextBlock
-                    AutoresText.Text = autoresTexto;
-                }
-                else
-                {
-                    AutoresText.Text = "No se pudo encontrar el archivo de autores.";
-                }
-            }
-            catch (Exception ex)
+        /// <summary>
+        /// Carga varios autores “a mano” y los muestra en el ListBox.
+        /// Además, los imprime en consola para demostrar que están cargados.
+        /// </summary>
+        private void CargarAutoresManualmente()
+        {
+            // Creamos una lista de autores
+            var listaAutores = new List<Autor>
             {
-                // En caso de error, mostrar un mensaje en el TextBlock
-                AutoresText.Text = "Error al cargar los datos de los autores: " + ex.Message;
+                new Autor("alex.salinero@alu.uclm.es", "alex", "Alex Salinero"),
+                new Autor("diego.palomino1@alu.uclm.es", "diego", "Diego Palomino"),
+                new Autor("jorge.rodriguez11@alu.uclm.es", "jorge", "Jorge Rodriguez")
+            };
+
+            // Mostrar en consola (si el proyecto está configurado como WPF, quizá no veas la consola,
+            // pero sirve de ejemplo de cómo imprimirlos)
+            foreach (var autor in listaAutores)
+            {
+                Console.WriteLine($"Correo: {autor.Email}, Nombre: {autor.Nombre}");
             }
+
+            // Enlazar la lista de autores al ListBox
+            AutoresList.ItemsSource = listaAutores;
         }
     }
 }
