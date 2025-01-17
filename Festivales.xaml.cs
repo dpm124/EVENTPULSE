@@ -138,23 +138,25 @@ namespace EVENTPULSE
 
 
         // Manejador del botón Editar Festival
+
         private void OnEditarClick(object sender, RoutedEventArgs e)
         {
             if (dgFestivales.SelectedItem is Festival festivalSeleccionado)
             {
                 var ventanaEditar = new AgregarFestivalWindow(festivalSeleccionado);
-
-                if (ventanaEditar.ShowDialog() == true)
-                {
-                    dgFestivales.Items.Refresh();
-                    MessageBox.Show("Los cambios han sido guardados correctamente.", "Edición completada", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                ventanaEditar.ShowDialog();
+                // Al cerrar, los cambios quedan en "festivalSeleccionado"
+                // (porque has manipulado el mismo objeto).
             }
             else
             {
-                MessageBox.Show("Por favor, selecciona un festival para editar.", "Editar Festival", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Por favor, selecciona un festival para editar.",
+                                "Editar Festival",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Warning);
             }
         }
+
 
         // Manejador del botón Borrar Festival
         private void OnBorrarClick(object sender, RoutedEventArgs e)
@@ -180,5 +182,9 @@ namespace EVENTPULSE
         public string Ubicación { get; set; }
         public DateTime Fecha { get; set; }
         public string Estado { get; set; }
+
+        // AGREGAR: cada Festival tendrá su propia lista de escenarios
+        public ObservableCollection<EscenarioModel> Escenarios { get; set; }
+            = new ObservableCollection<EscenarioModel>();
     }
 }

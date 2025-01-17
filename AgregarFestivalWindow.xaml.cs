@@ -21,41 +21,53 @@ namespace EVENTPULSE
         // Ruta del archivo de persistencia
         private readonly string filePath = "festival.txt";
 
-        // Constructor para añadir un nuevo festival (sin parámetros)
-        public AgregarFestivalWindow()
+        public AgregarFestivalWindow(Festival festival = null)
         {
             InitializeComponent();
             this.DataContext = this;
-            Escenarios = new ObservableCollection<EscenarioModel>
+
+            // Si te pasa "null" => es un FESTIVAL NUEVO
+            if (festival == null)
             {
-                new EscenarioModel { Nombre = "Escenario PRINCIPAL", TieneInformacion = false },
-                new EscenarioModel { Nombre = "Escenario 1", TieneInformacion = false },
-                new EscenarioModel { Nombre = "Escenario 2", TieneInformacion = true, Artista = "Artista A", Fecha = "2024-05-15", AforoMax = 500 },
-                new EscenarioModel { Nombre = "Escenario 3", TieneInformacion = true, Artista = "Artista B", Fecha = "2024-06-20", AforoMax = 600 },
-                new EscenarioModel { Nombre = "Escenario 4", TieneInformacion = false }
-            };
-            this.DataContext = this; // Enlazar la lista de escenarios con la interfaz
-            FestivalEditado = new Festival();
-            dgArtistas.ItemsSource = Artistas;
-            CargarFestivalDesdeArchivo();
-        }
+                festival = new Festival();
+            }
 
-        // Constructor para editar un festival existente
-        public AgregarFestivalWindow(Festival festival)
-        {
-            InitializeComponent();
+            // A PARTIR DE AQUÍ, festival no es null
+            // Aseguramos que haya 5 escenarios
+            // (Si el festival ya tiene menos de 5, completamos;
+            //  si tiene más, no hacemos nada)
+            if (festival.Escenarios.Count < 5)
+            {
+                for (int i = festival.Escenarios.Count; i < 5; i++)
+                {
+                    festival.Escenarios.Add(new EscenarioModel
+                    {
+                        Nombre = $"Escenario {i}",
+                        TieneInformacion = false
+                    });
+                }
+            }
+
+            // Asignar a la propiedad FestivalEditado
             FestivalEditado = festival;
-            txtNombreFestival.Text = festival.Nombre; // Asignar nombre
-            txtAbonoGeneral.Text = festival.Nombre;   // Asignar abono general si aplica
-            txtUbicacionFestival.Text = festival.Ubicación;
-            dpFechaFestival.SelectedDate = festival.Fecha;
-            txtDescripcionFestival.Text = festival.Estado; // Ajustar según corresponda
 
+            // Rellenar datos del festival en los controles
+            txtNombreFestival.Text = FestivalEditado.Nombre;
+            txtAbonoGeneral.Text = FestivalEditado.Nombre;
+            txtUbicacionFestival.Text = FestivalEditado.Ubicación;
+            dpFechaFestival.SelectedDate = FestivalEditado.Fecha;
+            txtDescripcionFestival.Text = FestivalEditado.Estado;
 
+            // Si quieres enlazar la lista a una propiedad local (Escenarios),
+            // hazlo ahora:
+            this.Escenarios = FestivalEditado.Escenarios;
 
+            // Resto de lógica
             dgArtistas.ItemsSource = Artistas;
             CargarFestivalDesdeArchivo();
         }
+
+
 
         // Método para cargar los datos del festival desde el archivo si existe
         private void CargarFestivalDesdeArchivo()
